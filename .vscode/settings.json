@@ -1,0 +1,5 @@
+{
+    "editor.inlayHints.enabled": "off",
+    "java.project.outputPath": "bin",
+    "java.project.sourcePaths": ["src"],
+}
