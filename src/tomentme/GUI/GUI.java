@@ -1,7 +1,10 @@
 package tomentme.GUI;
 
 import java.awt.*;
+import java.security.PublicKey;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import tomentme.*;        
 import tomentme.GUI.Elements.*;
@@ -11,6 +14,9 @@ public class GUI
 {
     private static JFrame frame;
 
+    public static Border notSelectedBorder;
+    public static Border selectedBorder;
+    public static Border hoverBorder;
 
     /**
      * Create the GUI and show it.  For thread safety,
@@ -32,6 +38,13 @@ public class GUI
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public static void InitializeGUIMembers()
+    {
+        notSelectedBorder = BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false);
+        selectedBorder = BorderFactory.createLineBorder(Color.YELLOW, 1, false);
+        hoverBorder = BorderFactory.createLineBorder(Color.CYAN, 1, false);
     }
 
 
@@ -89,11 +102,7 @@ public class GUI
         
         JPanel incRightPanel = new JPanel();
         incRightPanel.setBackground(Color.blue);
-        incRightPanel.setPreferredSize(new Dimension(200, 100));
-
-
-
-
+        incRightPanel.setPreferredSize(new Dimension(150, 100));
         commandsPanel.add(incRightPanel);
 
         toolSections.add(commandsPanel);
@@ -102,25 +111,64 @@ public class GUI
 
         JPanel palettePanel = new JPanel();
         palettePanel.setBackground(Color.GREEN);
-        palettePanel.setPreferredSize(new Dimension(200, 400));
+        palettePanel.setPreferredSize(new Dimension(150, 400));
+
+        JPanel paletteSelection = new JPanel();
+        palettePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JLabel psLabel = new JLabel("Palette: ");
+        paletteSelection.add(psLabel);
+
+        JPanel paletteButtons = new JPanel();
+        
+        JButton psBTextures = new JButton("TEXTURES");
+        psBTextures.setBorder(null);
+        psBTextures.setPreferredSize(new Dimension(60, 20));
+        paletteButtons.add(psBTextures);
+
+        JButton psBObjects = new JButton("OBJECTS");
+        psBObjects.setBorder(null);
+        psBObjects.setPreferredSize(new Dimension(60, 20));
+        paletteButtons.add(psBObjects);
+
+        JButton psBAI = new JButton("AI");
+        psBAI.setBorder(null);
+        psBAI.setPreferredSize(new Dimension(30, 20));
+        paletteButtons.add(psBAI);
+
+        JButton psBFloorCeiling = new JButton("F/C");
+        psBFloorCeiling.setBorder(null);
+        psBFloorCeiling.setPreferredSize(new Dimension(30, 20));
+        paletteButtons.add(psBFloorCeiling);
+    
+        
+        palettePanel.add(paletteSelection);
+        palettePanel.add(paletteButtons);
+        
+
         toolSections.add(palettePanel);
 
         JPanel viewerPanel = new JPanel();
         viewerPanel.setBackground(Color.CYAN);
-        viewerPanel.setPreferredSize(new Dimension(200, 200));
+        viewerPanel.setPreferredSize(new Dimension(150, 200));
         toolSections.add(viewerPanel);
 
         JPanel selectedFacePanel = new JPanel();
         selectedFacePanel.setBackground(Color.YELLOW);
-        selectedFacePanel.setPreferredSize(new Dimension(200, 200));
+        selectedFacePanel.setPreferredSize(new Dimension(150, 200));
         toolSections.add(selectedFacePanel);
 
-        JPanel viewport = new JPanel();
+        JPanel viewport = new JPanel(new GridLayout(24, 24));
         viewport.setBackground(Color.GRAY);
 
 
-        JButton cbtn = new JButton("Click");
-        viewport.add(cbtn);
+        for(int i = 0; i < 24; i++)
+            for(int j = 0; j < 24; j++)
+            {
+                TileButton btn = new TileButton();
+                btn.setBackground(Color.gray);
+                viewport.add(btn);
+            }
 
 
         content.add(toolSections, BorderLayout.EAST);
