@@ -223,7 +223,7 @@ public class GUI
         JPanel sbtnPnl = new JPanel();
         JButton sbtn = new JButton("Select");
         sbtn.setBorder(null);
-        sbtn.setPreferredSize(new Dimension(100,30));
+        sbtn.setPreferredSize(new Dimension(70,15));
         sbtnPnl.add(sbtn);
 
         selectedFacePanel.add(sbtnPnl);
