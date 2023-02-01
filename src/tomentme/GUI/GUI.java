@@ -1,7 +1,6 @@
 package tomentme.GUI;
 
 import java.awt.*;
-import java.security.PublicKey;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,6 +8,9 @@ import javax.swing.border.Border;
 import tomentme.*;        
 import tomentme.GUI.Elements.*;
 
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 public class GUI 
 {
@@ -31,6 +33,7 @@ public class GUI
         frame.setPreferredSize(new Dimension(TomentME.DEF_WINDOW_W,TomentME.DEF_WINDOW_H));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        InitializeGUIMembers();
         AddMenuBar();
         AddMainContent();
 
@@ -44,7 +47,7 @@ public class GUI
     {
         notSelectedBorder = BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false);
         selectedBorder = BorderFactory.createLineBorder(Color.YELLOW, 1, false);
-        hoverBorder = BorderFactory.createLineBorder(Color.CYAN, 1, false);
+        hoverBorder = BorderFactory.createLineBorder(Color.YELLOW, 1, false);
     }
 
 
@@ -111,9 +114,10 @@ public class GUI
 
         JPanel palettePanel = new JPanel();
         palettePanel.setBackground(Color.GREEN);
-        palettePanel.setPreferredSize(new Dimension(150, 400));
+        palettePanel.setPreferredSize(new Dimension(150, 240));
 
         JPanel paletteSelection = new JPanel();
+        paletteSelection.setLayout(new FlowLayout(FlowLayout.LEFT));
         palettePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JLabel psLabel = new JLabel("Palette: ");
@@ -140,33 +144,143 @@ public class GUI
         psBFloorCeiling.setBorder(null);
         psBFloorCeiling.setPreferredSize(new Dimension(30, 20));
         paletteButtons.add(psBFloorCeiling);
-    
         
-        palettePanel.add(paletteSelection);
-        palettePanel.add(paletteButtons);
+        JPanel psContent = new JPanel();
+        psContent.setLayout(new BorderLayout());
+        psContent.setBackground(Color.yellow);
         
+        JPanel scrollContentPanel = new JPanel(new GridLayout(0,2));
+        JScrollPane scrollFrame = new JScrollPane(scrollContentPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollFrame.setPreferredSize(new Dimension( 210,140));
+        scrollFrame.setAutoscrolls(true);
 
+        // Fill items
+        for(int i = 0; i < 5; i++)
+        {
+            JPanel objContainer = new JPanel();
+            objContainer.setBackground(Color.gray);
+            JLabel objLabel = new JLabel("ItemID");
+            objLabel.setPreferredSize(new Dimension(90, 60));
+            objContainer.add(objLabel);
+            scrollContentPanel.add(objContainer);
+        }
+
+        psContent.add(scrollFrame);
+        toolSections.add(paletteSelection);
+        palettePanel.add(paletteButtons);
+        palettePanel.add(psContent);
         toolSections.add(palettePanel);
 
         JPanel viewerPanel = new JPanel();
+        viewerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         viewerPanel.setBackground(Color.CYAN);
-        viewerPanel.setPreferredSize(new Dimension(150, 200));
+        
+        JPanel viewerPanelSelection = new JPanel();
+        viewerPanelSelection.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JLabel vLabel = new JLabel("Viewer: ");
+        viewerPanelSelection.add(vLabel);
+
+        toolSections.add(viewerPanelSelection);
+
+        JPanel viewerContentPanel = new JPanel();
+        viewerContentPanel.setLayout(new BoxLayout(viewerContentPanel, BoxLayout.Y_AXIS));
+
+        viewerContentPanel.add(new JLabel("Selected Tile: (0,0)"));
+        viewerContentPanel.add(new JLabel("Wall Type: None"));
+        viewerContentPanel.add(new JLabel("Load Preset"));
+        viewerContentPanel.add(new JLabel("Wall Data: NULL"));
+
+        viewerPanel.add(viewerContentPanel);
         toolSections.add(viewerPanel);
 
         JPanel selectedFacePanel = new JPanel();
+        selectedFacePanel.setLayout(new FlowLayout());
         selectedFacePanel.setBackground(Color.YELLOW);
-        selectedFacePanel.setPreferredSize(new Dimension(150, 200));
+
+        JPanel selectedFaceSelection = new JPanel();
+        selectedFaceSelection.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JLabel sfLabel = new JLabel("Selected Info: ");
+        selectedFaceSelection.add(sfLabel);
+        toolSections.add(selectedFaceSelection);
+
+        BufferedImage myPicture;
+        try 
+        {
+            myPicture = ImageIO.read(new File("C:/Users/silve/Desktop/315424480_3536606013292959_305079958389972222_n.jpg"));
+            ImageIcon img = new ImageIcon(myPicture);
+            Image newimg = img.getImage().getScaledInstance(64, 64,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            JLabel picLabel = new JLabel(new ImageIcon(newimg));
+            picLabel.setPreferredSize(new Dimension(64,64));
+            selectedFacePanel.add(picLabel, BorderLayout.LINE_START);
+
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+
+        JPanel sbtnPnl = new JPanel();
+        JButton sbtn = new JButton("Select");
+        sbtn.setBorder(null);
+        sbtn.setPreferredSize(new Dimension(100,30));
+        sbtnPnl.add(sbtn);
+
+        selectedFacePanel.add(sbtnPnl);
+
+        JPanel pnl = new JPanel();
+        pnl.setLayout(new GridLayout(0, 1));
+
+        JButton TOPBtn = new JButton("TOP");
+        JButton BOTTOMBtn = new JButton("BOTTOM");
+        JButton LEFTBtn = new JButton("LEFT");
+        JButton RIGHTBtn = new JButton("RIGHT");
+        JButton FORWARDBtn = new JButton("FORWARD");
+        JButton BACKBtn = new JButton("BACK");
+
+        TOPBtn.setPreferredSize(new Dimension(60, 15));
+        BOTTOMBtn.setPreferredSize(new Dimension(60, 15));
+        LEFTBtn.setPreferredSize(new Dimension(60, 15));
+        RIGHTBtn.setPreferredSize(new Dimension(60, 15));
+        FORWARDBtn.setPreferredSize(new Dimension(60, 15));
+        BACKBtn.setPreferredSize(new Dimension(60, 15));
+
+        TOPBtn.setBorder(null);
+        BOTTOMBtn.setBorder(null);
+        LEFTBtn.setBorder(null);
+        RIGHTBtn.setBorder(null);
+        FORWARDBtn.setBorder(null);
+        BACKBtn.setBorder(null);
+
+        TOPBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+        BOTTOMBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+        LEFTBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+        RIGHTBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+        FORWARDBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+        BACKBtn.setFont(new Font("Arial", Font.PLAIN, 10));
+
+
+        pnl.add(TOPBtn);
+        pnl.add(BOTTOMBtn);
+        pnl.add(LEFTBtn);
+        pnl.add(RIGHTBtn);
+        pnl.add(FORWARDBtn);
+        pnl.add(BACKBtn);
+
+
+        selectedFacePanel.add(pnl, BorderLayout.LINE_END);
+
         toolSections.add(selectedFacePanel);
 
         JPanel viewport = new JPanel(new GridLayout(24, 24));
         viewport.setBackground(Color.GRAY);
-
 
         for(int i = 0; i < 24; i++)
             for(int j = 0; j < 24; j++)
             {
                 TileButton btn = new TileButton();
                 btn.setBackground(Color.gray);
+                btn.setBorder(notSelectedBorder);
                 viewport.add(btn);
             }
 
