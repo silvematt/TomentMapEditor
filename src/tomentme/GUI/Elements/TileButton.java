@@ -1,23 +1,30 @@
 package tomentme.GUI.Elements;
 
-import java.awt.*;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.border.*;
-import javax.swing.event.MouseInputListener;
 
 import tomentme.GUI.*;
+import java.awt.event.*;
 
 public class TileButton extends JButton
 {
-    boolean isSelected;
-    Border border;
+    private int x,y;
+    private boolean isSelected;
 
-    public TileButton()
+
+    public TileButton(int _x, int _y)
     {
+        this.x = _x;
+        this.y = _y;
+
         this.addMouseListener(GetMl());
+        this.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                System.out.println(x + " | " + y);
+            }
+        });
     }
 
     // Tile Button MoseAdapter for Border
@@ -32,14 +39,14 @@ public class TileButton extends JButton
                 public void mouseEntered(java.awt.event.MouseEvent evt)
                 {            
                     JButton c = (JButton)evt.getComponent();                   
-                    c.setBorder(GUI.hoverBorder);
+                    c.setBorder(TomentEditor.hoverBorder);
                 }                                      
             
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent evt)
                 {                                      
                     JButton c = (JButton)evt.getComponent();                   
-                    c.setBorder(GUI.notSelectedBorder);
+                    c.setBorder(TomentEditor.notSelectedBorder);
                 }  
             };
 
@@ -47,5 +54,20 @@ public class TileButton extends JButton
         }
 
         return ml;
+    }
+
+    public int GetX()
+    {
+        return x;
+    }
+
+    public int GetY()
+    {
+        return y;
+    }
+
+    public boolean IsSelected()
+    {
+        return isSelected;
     }
 }
