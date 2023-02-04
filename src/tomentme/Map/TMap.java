@@ -22,7 +22,7 @@ public class TMap
     private int playerStartingGridY;
     private float playerStartingRot;
 
-    private WallObject[][] level0 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
+    public WallObject[][] level0 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
     private WallObject[][] level1 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
     private WallObject[][] level2 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
 
@@ -42,12 +42,12 @@ public class TMap
 
     public TMap()
     {
-        for(int x=0; x<24; x++)
-            for(int y=0; y<24; y++)
+        for(int y=0; y<24; y++)
+            for(int x=0; x<24; x++)
             {
-                this.level0[x][y] = new WallObject();
-                this.level1[x][y] = new WallObject();
-                this.level2[x][y] = new WallObject();
+                this.level0[y][x] = new WallObject();
+                this.level1[y][x] = new WallObject();
+                this.level2[y][x] = new WallObject();
             }
     }
 

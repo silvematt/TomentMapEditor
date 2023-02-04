@@ -7,7 +7,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import tomentme.*;        
+import tomentme.*;
+import tomentme.AssetsManager.AssetManager;
 import tomentme.GUI.*;
 import tomentme.GUI.Elements.*;
 import tomentme.GUI.Toolbar.*;
@@ -58,12 +59,18 @@ public class TomentEditor extends JPanel
         viewer = new ViewerPanel(toolSections);
         selection = new SelectionPanel(toolSections);
 
+        AssetManager assetManager = new AssetManager();
+        AssetManager.instance = assetManager;
+        assetManager.InitializeAssetManager();
+
         this.add(toolSections, BorderLayout.EAST);
         viewport = new Viewport(this);
         
         // Testing level load
         currentMap = new TMap();
         currentMap.LoadMap("lvl1");
+
+        viewport.UpdateViewport();
     }
 
     public void SelectTile(TileButton tile)
