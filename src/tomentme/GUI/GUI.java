@@ -3,7 +3,8 @@ package tomentme.GUI;
 import java.awt.*;
 import javax.swing.*;
 
-import tomentme.*;        
+import tomentme.*;
+import tomentme.GUI.Elements.TileButton;        
 
 public class GUI 
 {
@@ -21,6 +22,9 @@ public class GUI
         frame.setLayout(new BorderLayout(10, 5));
         frame.setPreferredSize(new Dimension(TomentME.DEF_WINDOW_W,TomentME.DEF_WINDOW_H));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Initialize
+        TileButton.InitializeGUIMembers();
 
         TomentEditor editor = new TomentEditor();
         AddMenuBar();

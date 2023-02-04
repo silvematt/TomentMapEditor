@@ -18,7 +18,7 @@ public class Viewport
             {
                 TileButton btn = new TileButton(j,i);
                 btn.setBackground(Color.gray);
-                btn.setBorder(TomentEditor.notSelectedBorder);
+                btn.setBorder(TileButton.notSelectedBorder);
                 viewport.add(btn);
             }
 

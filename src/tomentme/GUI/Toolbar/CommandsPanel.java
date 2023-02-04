@@ -5,6 +5,8 @@ import javax.swing.*;
 
 public class CommandsPanel 
 {
+    private JLabel curFloorText;
+
     public CommandsPanel(JPanel toolSections)
     {
         JPanel commandsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -14,7 +16,7 @@ public class CommandsPanel
         incLeftPanel.setLayout(new GridLayout(3,1));
         incLeftPanel.setPreferredSize(new Dimension(60, 80));
 
-        JLabel curFloorText = new JLabel("Floor: 0");
+        curFloorText = new JLabel("Floor: 0");
         curFloorText.setHorizontalAlignment(JLabel.CENTER);
         incLeftPanel.add(curFloorText);
 
@@ -32,5 +34,10 @@ public class CommandsPanel
         commandsPanel.add(incRightPanel);
 
         toolSections.add(commandsPanel);
+    }
+
+    public void SetCurFloorText(String str)
+    {
+        curFloorText.setText(str);
     }
 }

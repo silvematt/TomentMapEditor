@@ -1,15 +1,39 @@
 package tomentme.GUI.Elements;
 
 import javax.swing.JButton;
+import javax.swing.border.Border;
 
+import javax.swing.*;
 import tomentme.GUI.*;
 import java.awt.event.*;
 
+import tomentme.*;        
+import tomentme.GUI.Elements.*;
+import tomentme.GUI.Toolbar.*;
+
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
+import java.awt.*;
+
+
 public class TileButton extends JButton
 {
+    // Tile Button Borders
+    public static Border notSelectedBorder;
+    public static Border selectedBorder;
+    public static Border hoverBorder;
+    
+    public static void InitializeGUIMembers()
+    {
+        notSelectedBorder = BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false);
+        selectedBorder = BorderFactory.createLineBorder(Color.YELLOW, 1, false);
+        hoverBorder = BorderFactory.createLineBorder(Color.WHITE, 1, false);
+    }
+
+    
     private int x,y;
     private boolean isSelected;
-
 
     public TileButton(int _x, int _y)
     {
@@ -23,6 +47,7 @@ public class TileButton extends JButton
             public void actionPerformed(ActionEvent e) 
             {
                 System.out.println(x + " | " + y);
+                TomentEditor.instance.SelectTile((TileButton)e.getSource());
             }
         });
     }
@@ -38,15 +63,18 @@ public class TileButton extends JButton
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt)
                 {            
-                    JButton c = (JButton)evt.getComponent();                   
-                    c.setBorder(TomentEditor.hoverBorder);
+                    TileButton c = (TileButton)evt.getComponent();     
+                    
+                    if(!c.IsSelected())       
+                        c.setBorder(hoverBorder);
                 }                                      
             
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent evt)
                 {                                      
-                    JButton c = (JButton)evt.getComponent();                   
-                    c.setBorder(TomentEditor.notSelectedBorder);
+                    TileButton c = (TileButton)evt.getComponent();      
+                    if(!c.IsSelected())
+                        c.setBorder(notSelectedBorder);
                 }  
             };
 
@@ -69,5 +97,16 @@ public class TileButton extends JButton
     public boolean IsSelected()
     {
         return isSelected;
+    }
+
+    public void SetSelected(boolean selected)
+    {
+        isSelected = selected;
+    }
+
+    public void Unselect()
+    {
+        setSelected(false);
+        setBorder(notSelectedBorder);
     }
 }

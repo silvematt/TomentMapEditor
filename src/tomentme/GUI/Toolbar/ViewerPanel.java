@@ -5,6 +5,8 @@ import javax.swing.*;
 
 public class ViewerPanel 
 {
+    private JLabel selectedTileLabel;
+
     public ViewerPanel(JPanel toolSections)
     {
         JPanel viewerPanel = new JPanel();
@@ -22,6 +24,9 @@ public class ViewerPanel
         JPanel viewerContentPanel = new JPanel();
         viewerContentPanel.setLayout(new BoxLayout(viewerContentPanel, BoxLayout.Y_AXIS));
 
+        selectedTileLabel = new JLabel("Selected Tile: (0,0)");
+        viewerContentPanel.add(selectedTileLabel);
+
         viewerContentPanel.add(new JLabel("Selected Tile: (0,0)"));
         viewerContentPanel.add(new JLabel("Wall Type: None"));
         viewerContentPanel.add(new JLabel("Load Preset"));
@@ -29,5 +34,10 @@ public class ViewerPanel
 
         viewerPanel.add(viewerContentPanel);
         toolSections.add(viewerPanel);
+    }
+
+    public void SetSelectedTileValue(String str)
+    {
+        selectedTileLabel.setText("Selected Tile: " + str);
     }
 }
