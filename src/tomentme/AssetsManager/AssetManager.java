@@ -39,7 +39,9 @@ public class AssetManager
         EMPTY,
         Wall,
         DoorHor,
-        DoorVer
+        DoorVer,
+        LadderUp,
+        LadderDown
     };
 
     public enum WallAssets
@@ -83,6 +85,14 @@ public class AssetManager
             // ME_DoorVer
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_doorver.bmp")));
             mapED[MapEDTextureIDs.DoorVer.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_LadderUp
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ladderup.bmp")));
+            mapED[MapEDTextureIDs.LadderUp.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_LadderDown
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ladderdown.bmp")));
+            mapED[MapEDTextureIDs.LadderDown.ordinal()] = new ImageIcon(imageBuff);
 
         } catch (IOException e) 
         {

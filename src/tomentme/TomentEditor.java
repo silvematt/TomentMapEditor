@@ -35,8 +35,11 @@ public class TomentEditor extends JPanel
 
     public TMap currentMap;
 
+    private int currentFloor = 0;
+
     // Logic
     private TileButton curSelectedButton;
+
 
     public TomentEditor()
     {
@@ -109,5 +112,22 @@ public class TomentEditor extends JPanel
     public Viewport GetViewport()
     {
         return viewport;
+    }
+
+    public int GetCurrentFloor()
+    {
+        return currentFloor;
+    }
+
+    public int SetCurrentFloor(int _floor)
+    {
+        if(_floor < 0)
+            _floor = 0;
+
+        if(_floor > 2)
+            _floor = 2;
+
+        commands.SetCurFloorText("Floor: " + _floor);
+        return (currentFloor = _floor);
     }
 }

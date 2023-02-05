@@ -23,8 +23,8 @@ public class TMap
     private float playerStartingRot;
 
     public WallObject[][] level0 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
-    private WallObject[][] level1 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
-    private WallObject[][] level2 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
+    public WallObject[][] level1 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
+    public WallObject[][] level2 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
 
     private int floorMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
     private int ceilingMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];

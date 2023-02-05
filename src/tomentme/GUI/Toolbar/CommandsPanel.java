@@ -1,7 +1,14 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 import javax.swing.*;
+
+import tomentme.TomentEditor;
+import tomentme.GUI.Elements.CommandsPanel.CommandDownLevelButton;
+import tomentme.GUI.Elements.CommandsPanel.CommandUpLevelButton;
 
 public class CommandsPanel 
 {
@@ -20,10 +27,10 @@ public class CommandsPanel
         curFloorText.setHorizontalAlignment(JLabel.CENTER);
         incLeftPanel.add(curFloorText);
 
-        JButton upLvlButton = new JButton("▲");
+        CommandUpLevelButton upLvlButton = new CommandUpLevelButton();
         incLeftPanel.add(upLvlButton);
         
-        JButton downLvlButton = new JButton("▼");
+        CommandDownLevelButton downLvlButton = new CommandDownLevelButton();
         incLeftPanel.add(downLvlButton);
 
         commandsPanel.add(incLeftPanel);
