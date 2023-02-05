@@ -17,9 +17,9 @@ public class TMap
     private String ID;
     private String displayName;
     
-    private int playerStartingLevel;
-    private int playerStartingGridX;
-    private int playerStartingGridY;
+    public int playerStartingLevel;
+    public int playerStartingGridX;
+    public int playerStartingGridY;
     private float playerStartingRot;
 
     public WallObject[][] level0 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
@@ -29,9 +29,9 @@ public class TMap
     private int floorMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
     private int ceilingMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
 
-    private int spritesMapLevel0[][] = new int[MAP_HEIGHT][MAP_WIDTH];
-    private int spritesMapLevel1[][] = new int[MAP_HEIGHT][MAP_WIDTH];
-    private int spritesMapLevel2[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+    public int spritesMapLevel0[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+    public int spritesMapLevel1[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+    public int spritesMapLevel2[][] = new int[MAP_HEIGHT][MAP_WIDTH];
 
     private float wallLight;
     private float floorLight;

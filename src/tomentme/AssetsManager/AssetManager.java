@@ -41,7 +41,12 @@ public class AssetManager
         DoorHor,
         DoorVer,
         LadderUp,
-        LadderDown
+        LadderDown,
+        Sprite,
+        AI,
+        InvisibleWall,
+        Teleporter,
+        PlayerStart
     };
 
     public enum WallAssets
@@ -57,6 +62,31 @@ public class AssetManager
         W_WallLadderDown,
         W_WallInvisible
     };
+
+    public enum SpritesAssets
+    {
+        // 0 = Empty
+        S_EMPTY,
+        S_Barrel1,
+        S_Campfire,
+        DS_Skeleton,
+        S_Fireball1,
+        S_PickupAxe,
+        S_PickupHealthPotion,
+        S_PickupManaPotion,
+        S_IceDart1,
+        S_TomeFireball1,
+        S_TomeIceDart1,
+        S_Table1,
+        S_SkullStatic,
+        DS_SkeletonElite,
+        S_AltarEmpty,
+        S_AltarHealth,
+        S_AltarMana,
+        DS_SkeletonBurnt,
+        S_PickupGreatsword,
+        DS_SkeletonLord
+    }
 
     // Map-Editor specific
     public ImageIcon[] mapED = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
@@ -93,6 +123,26 @@ public class AssetManager
             // ME_LadderDown
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ladderdown.bmp")));
             mapED[MapEDTextureIDs.LadderDown.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_Sprite
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_sprite.bmp")));
+            mapED[MapEDTextureIDs.Sprite.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_AI
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ai.bmp")));
+            mapED[MapEDTextureIDs.AI.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_InvisibleWall
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_invisiblewall.bmp")));
+            mapED[MapEDTextureIDs.InvisibleWall.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_Teleporter
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_teleporter.bmp")));
+            mapED[MapEDTextureIDs.Teleporter.ordinal()] = new ImageIcon(imageBuff);
+
+            // ME_PlayerStart
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_playerstart.bmp")));
+            mapED[MapEDTextureIDs.PlayerStart.ordinal()] = new ImageIcon(imageBuff);
 
         } catch (IOException e) 
         {

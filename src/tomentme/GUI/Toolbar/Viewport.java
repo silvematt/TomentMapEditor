@@ -1,11 +1,14 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
 import javax.swing.*;
 
 import tomentme.TomentEditor;
 import tomentme.AssetsManager.AssetManager;
 import tomentme.AssetsManager.AssetManager.MapEDTextureIDs;
+import tomentme.AssetsManager.AssetManager.SpritesAssets;
 import tomentme.AssetsManager.AssetManager.WallAssets;
 import tomentme.GUI.*;
 import tomentme.GUI.Elements.*;
@@ -39,24 +42,32 @@ public class Viewport
 
     public void UpdateViewport()
     {
-        WallObject map[][];
+        TMap currentMap = TomentEditor.instance.currentMap;
+        WallObject wallMap[][];
+        int spritesMap[][];
 
-        switch(TomentEditor.instance.GetCurrentFloor())
+        int currentFloor = TomentEditor.instance.GetCurrentFloor();
+
+        switch(currentFloor)
         {
             case 0: 
-                map = TomentEditor.instance.currentMap.level0; 
+                wallMap = currentMap.level0; 
+                spritesMap = currentMap.spritesMapLevel0;
                 break;
 
             case 1: 
-                map = TomentEditor.instance.currentMap.level1; 
+                wallMap = currentMap.level1; 
+                spritesMap = currentMap.spritesMapLevel1;
                 break;
 
             case 2: 
-                map = TomentEditor.instance.currentMap.level2; 
+                wallMap = currentMap.level2; 
+                spritesMap = currentMap.spritesMapLevel2;
                 break;
             
             default:
-                map = TomentEditor.instance.currentMap.level0; 
+                wallMap = currentMap.level0; 
+                spritesMap = currentMap.spritesMapLevel0;
                 break;
         }
 
@@ -66,21 +77,45 @@ public class Viewport
                 // Clear the button
                 tiles[x][y].setIcon(null);
 
-                int aID = map[y][x].assetID;
-
-                if(aID > WallAssets.EMPTY.ordinal())
+                int wallID = wallMap[y][x].assetID;
+                
+                // Render Wall Map
+                if(wallID > WallAssets.EMPTY.ordinal())
                 {
-                    if(aID == WallAssets.W_DoorHor.ordinal())
+                    if(wallID == WallAssets.W_DoorHor.ordinal())
                         tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.DoorHor.ordinal()]);
-                    else if(aID == WallAssets.W_DoorVer.ordinal())
+                    else if(wallID == WallAssets.W_DoorVer.ordinal())
                         tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.DoorVer.ordinal()]);
-                    else if(aID == WallAssets.W_WallLadder.ordinal())
+                    else if(wallID == WallAssets.W_WallLadder.ordinal())
                         tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.LadderUp.ordinal()]);
-                    else if(aID == WallAssets.W_WallLadderDown.ordinal())
+                    else if(wallID == WallAssets.W_WallLadderDown.ordinal())
                         tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.LadderDown.ordinal()]);
+                    else if(wallID == WallAssets.W_WallInvisible.ordinal())
+                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.InvisibleWall.ordinal()]);
+                    else if(wallID == WallAssets.W_WallTriggerChangeMap.ordinal())
+                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Teleporter.ordinal()]);
                     else
                         tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Wall.ordinal()]);
                 }
+
+                // Render Sprites Map
+                int spriteID = spritesMap[y][x];
+
+                if(spriteID > SpritesAssets.S_EMPTY.ordinal())
+                {
+                    // Check for AIs
+                    if(spriteID == SpritesAssets.DS_Skeleton.ordinal() || spriteID == SpritesAssets.DS_SkeletonBurnt.ordinal() ||
+                        spriteID == SpritesAssets.DS_SkeletonElite.ordinal() || spriteID == SpritesAssets.DS_SkeletonLord.ordinal())
+                        {
+                            tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.AI.ordinal()]);
+                        }
+                        else
+                            tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Sprite.ordinal()]);
+                }
+
+                // Render Player Spawn
+                if(currentMap.playerStartingLevel == currentFloor && x == currentMap.playerStartingGridX && y == currentMap.playerStartingGridY)
+                    tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.PlayerStart.ordinal()]);
             }
     }
 }

@@ -4,16 +4,9 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 
 import javax.swing.*;
-import tomentme.GUI.*;
 import java.awt.event.*;
 
 import tomentme.*;        
-import tomentme.GUI.Elements.*;
-import tomentme.GUI.Toolbar.*;
-
-import java.io.*;
-import java.awt.image.*;
-import javax.imageio.*;
 import java.awt.*;
 
 
