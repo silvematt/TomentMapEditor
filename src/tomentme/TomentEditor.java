@@ -5,18 +5,12 @@ import javax.swing.JPanel;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
-import tomentme.*;
 import tomentme.AssetsManager.AssetManager;
-import tomentme.GUI.*;
 import tomentme.GUI.Elements.*;
 import tomentme.GUI.Toolbar.*;
 import tomentme.Map.TMap;
 
-import java.io.*;
-import java.awt.image.*;
-import javax.imageio.*;
 
 
 public class TomentEditor extends JPanel
@@ -26,20 +20,28 @@ public class TomentEditor extends JPanel
     // Tools
     private JPanel toolSections;
 
+    // Elements
     private CommandsPanel commands;
     private PalettePanel palette;
     private ViewerPanel viewer;
     private SelectionPanel selection;
-
     private Viewport viewport;
 
+    // Data
     public TMap currentMap;
-
     private int currentFloor = 0;
 
-    // Logic
+    // Application Logic
     private TileButton curSelectedButton;
+    public enum EditMode
+    {
+        WALL,
+        SPRITE,
+        FLOOR_CEILING,
+        AI
+    }
 
+    private EditMode curEditMode = EditMode.WALL;
 
     public TomentEditor()
     {
@@ -56,15 +58,15 @@ public class TomentEditor extends JPanel
         toolSections = new JPanel();
         toolSections.setLayout(new BoxLayout(toolSections, BoxLayout.Y_AXIS));
         toolSections.setBackground(Color.red);
+
+        AssetManager assetManager = new AssetManager();
+        AssetManager.instance = assetManager;
+        assetManager.InitializeAssetManager();
         
         commands = new CommandsPanel(toolSections);
         palette = new PalettePanel(toolSections);
         viewer = new ViewerPanel(toolSections);
         selection = new SelectionPanel(toolSections);
-
-        AssetManager assetManager = new AssetManager();
-        AssetManager.instance = assetManager;
-        assetManager.InitializeAssetManager();
 
         this.add(toolSections, BorderLayout.EAST);
         viewport = new Viewport(this);
@@ -129,5 +131,13 @@ public class TomentEditor extends JPanel
 
         commands.SetCurFloorText("Floor: " + _floor);
         return (currentFloor = _floor);
+    }
+
+    public void SetMode(EditMode mode)
+    {
+        curEditMode = mode;
+
+        // Update all
+        commands.SetCurModeText(curEditMode);
     }
 }

@@ -27,7 +27,6 @@ public class ViewerPanel
         selectedTileLabel = new JLabel("Selected Tile: (0,0)");
         viewerContentPanel.add(selectedTileLabel);
 
-        viewerContentPanel.add(new JLabel("Selected Tile: (0,0)"));
         viewerContentPanel.add(new JLabel("Wall Type: None"));
         viewerContentPanel.add(new JLabel("Load Preset"));
         viewerContentPanel.add(new JLabel("Wall Data: NULL"));

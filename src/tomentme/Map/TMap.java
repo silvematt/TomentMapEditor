@@ -1,13 +1,10 @@
 package tomentme.Map;
 
 import tomentme.Main;
-import tomentme.Map.*;
 
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.io.FileReader;
-import java.nio.file.Files;
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File; 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class TMap 
 {
@@ -165,8 +162,6 @@ public class TMap
             str = str.substring(0, str.indexOf(";"));
 
             this.absCeilingLevel = Integer.parseInt(str);
-
-
 
             fileScanner.close();
         } 

@@ -4,9 +4,9 @@ import javax.swing.JButton;
 
 import tomentme.TomentEditor;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+
 public class CommandUpLevelButton extends JButton
 {
     public CommandUpLevelButton()

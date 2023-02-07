@@ -1,18 +1,16 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.*;
-
 import javax.swing.*;
 
-import tomentme.TomentEditor;
-import tomentme.GUI.Elements.CommandsPanel.CommandDownLevelButton;
-import tomentme.GUI.Elements.CommandsPanel.CommandUpLevelButton;
+import tomentme.GUI.Elements.CommandsPanel.*;
+import tomentme.TomentEditor.EditMode;
 
 public class CommandsPanel 
 {
     private JLabel curFloorText;
+
+    private JLabel curMode;
 
     public CommandsPanel(JPanel toolSections)
     {
@@ -36,15 +34,45 @@ public class CommandsPanel
         commandsPanel.add(incLeftPanel);
         
         JPanel incRightPanel = new JPanel();
-        incRightPanel.setBackground(Color.blue);
+        incRightPanel.setBackground(Color.gray);
         incRightPanel.setPreferredSize(new Dimension(150, 100));
+        
+        curMode = new JLabel("Current mode: WALL");
+        incRightPanel.add(curMode);
         commandsPanel.add(incRightPanel);
-
+        
         toolSections.add(commandsPanel);
     }
 
     public void SetCurFloorText(String str)
     {
         curFloorText.setText(str);
+    }
+
+    public void SetCurModeText(EditMode mode)
+    {
+        switch(mode)
+        {
+            case WALL:
+                curMode.setText("Current mode: WALL");
+                break;
+
+            case AI:
+                curMode.setText("Current mode: AI");
+                break;
+
+            case FLOOR_CEILING:
+                curMode.setText("Current mode: F/C");
+                break;
+
+            case SPRITE:
+                curMode.setText("Current mode: SPRITE");
+                break;
+
+            default:
+                curMode.setText("Current mode: WALL");
+                break;
+
+        }
     }
 }

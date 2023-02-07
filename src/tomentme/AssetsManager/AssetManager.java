@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import tomentme.Main;
 
 import java.io.*;
+import java.awt.Image;
 import java.awt.image.*;
 import javax.imageio.*;
 
@@ -93,10 +94,13 @@ public class AssetManager
 
     // TomentRaycaster
     public ImageIcon[] textures = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
+    public ImageIcon[] sprites = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
+
 
     public void InitializeAssetManager()
     {
         LoadMapED();
+        LoadSprites();
     }
 
     private void LoadMapED()
@@ -144,6 +148,52 @@ public class AssetManager
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_playerstart.bmp")));
             mapED[MapEDTextureIDs.PlayerStart.ordinal()] = new ImageIcon(imageBuff);
 
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void LoadSprites()
+    {
+        BufferedImage imageBuff;
+        try 
+        {
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/barrel.bmp")));
+            sprites[SpritesAssets.S_Barrel1.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_campfire.bmp")));
+            sprites[SpritesAssets.S_Campfire.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_axe_pickup_anim.bmp")));
+            sprites[SpritesAssets.S_PickupAxe.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_pickup_health_potion.bmp")));
+            sprites[SpritesAssets.S_PickupHealthPotion.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_pickup_mana_potion.bmp")));
+            sprites[SpritesAssets.S_PickupManaPotion.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_tome_fireball01.bmp")));
+            sprites[SpritesAssets.S_TomeFireball1.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_tome_icedart01.bmp")));
+            sprites[SpritesAssets.S_TomeIceDart1.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/table1.bmp")));
+            sprites[SpritesAssets.S_Table1.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_skull_static.bmp")));
+            sprites[SpritesAssets.S_SkullStatic.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/altar_empty.bmp")));
+            sprites[SpritesAssets.S_AltarEmpty.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/altar_health.bmp")));
+            sprites[SpritesAssets.S_AltarHealth.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/altar_mana.bmp")));
+            sprites[SpritesAssets.S_AltarMana.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
         } catch (IOException e) 
         {
             e.printStackTrace();

@@ -1,16 +1,12 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 import javax.swing.*;
 
 import tomentme.TomentEditor;
 import tomentme.AssetsManager.AssetManager;
-import tomentme.AssetsManager.AssetManager.MapEDTextureIDs;
-import tomentme.AssetsManager.AssetManager.SpritesAssets;
-import tomentme.AssetsManager.AssetManager.WallAssets;
-import tomentme.GUI.*;
+import tomentme.AssetsManager.AssetManager.*;
 import tomentme.GUI.Elements.*;
 
 import tomentme.Map.*;

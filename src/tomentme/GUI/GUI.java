@@ -22,6 +22,7 @@ public class GUI
         frame.setLayout(new BorderLayout(10, 5));
         frame.setPreferredSize(new Dimension(TomentME.DEF_WINDOW_W,TomentME.DEF_WINDOW_H));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
         // Initialize
         TileButton.InitializeGUIMembers();

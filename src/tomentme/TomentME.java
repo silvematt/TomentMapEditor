@@ -1,7 +1,5 @@
 package tomentme;
 
-import tomentme.GUI.Elements.TileButton;
-
 public final class TomentME 
 {
     // Defines
