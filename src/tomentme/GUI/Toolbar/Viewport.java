@@ -79,19 +79,19 @@ public class Viewport
                 if(wallID > WallAssets.EMPTY.ordinal())
                 {
                     if(wallID == WallAssets.W_DoorHor.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.DoorHor.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.DoorHor.ordinal()]);
                     else if(wallID == WallAssets.W_DoorVer.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.DoorVer.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.DoorVer.ordinal()]);
                     else if(wallID == WallAssets.W_WallLadder.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.LadderUp.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.LadderUp.ordinal()]);
                     else if(wallID == WallAssets.W_WallLadderDown.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.LadderDown.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.LadderDown.ordinal()]);
                     else if(wallID == WallAssets.W_WallInvisible.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.InvisibleWall.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.InvisibleWall.ordinal()]);
                     else if(wallID == WallAssets.W_WallTriggerChangeMap.ordinal())
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Teleporter.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.Teleporter.ordinal()]);
                     else
-                        tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Wall.ordinal()]);
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.Wall.ordinal()]);
                 }
 
                 // Render Sprites Map
@@ -103,15 +103,15 @@ public class Viewport
                     if(spriteID == SpritesAssets.DS_Skeleton.ordinal() || spriteID == SpritesAssets.DS_SkeletonBurnt.ordinal() ||
                         spriteID == SpritesAssets.DS_SkeletonElite.ordinal() || spriteID == SpritesAssets.DS_SkeletonLord.ordinal())
                         {
-                            tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.AI.ordinal()]);
+                            tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.AI.ordinal()]);
                         }
                         else
-                            tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.Sprite.ordinal()]);
+                            tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.Sprite.ordinal()]);
                 }
 
                 // Render Player Spawn
                 if(currentMap.playerStartingLevel == currentFloor && x == currentMap.playerStartingGridX && y == currentMap.playerStartingGridY)
-                    tiles[x][y].setIcon(AssetManager.instance.mapED[MapEDTextureIDs.PlayerStart.ordinal()]);
+                    tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.PlayerStart.ordinal()]);
             }
     }
 }

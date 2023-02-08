@@ -75,6 +75,7 @@ public class TomentEditor extends JPanel
         currentMap = new TMap();
         currentMap.LoadMap("lvl1");
 
+        SetMode(EditMode.WALL);
         viewport.UpdateViewport();
     }
 
@@ -139,5 +140,6 @@ public class TomentEditor extends JPanel
 
         // Update all
         commands.SetCurModeText(curEditMode);
+        palette.OnStateChanges(curEditMode);
     }
 }

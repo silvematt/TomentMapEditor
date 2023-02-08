@@ -90,7 +90,8 @@ public class AssetManager
     }
 
     // Map-Editor specific
-    public ImageIcon[] mapED = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
+    public ImageIcon[] mapEditorViewport = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
+    public ImageIcon[] mapEditorPalette = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
 
     // TomentRaycaster
     public ImageIcon[] textures = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
@@ -99,55 +100,95 @@ public class AssetManager
 
     public void InitializeAssetManager()
     {
-        LoadMapED();
+        LoadMapEditorViewport();
+        LoadMapEditorPalette();
+
         LoadSprites();
     }
 
-    private void LoadMapED()
+    private void LoadMapEditorViewport()
     {
         BufferedImage imageBuff;
         try 
         {
             // ME_Wall
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_wall.bmp")));
-            mapED[MapEDTextureIDs.Wall.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.Wall.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_DoorHor
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_doorhor.bmp")));
-            mapED[MapEDTextureIDs.DoorHor.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.DoorHor.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_DoorVer
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_doorver.bmp")));
-            mapED[MapEDTextureIDs.DoorVer.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.DoorVer.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_LadderUp
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ladderup.bmp")));
-            mapED[MapEDTextureIDs.LadderUp.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.LadderUp.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_LadderDown
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ladderdown.bmp")));
-            mapED[MapEDTextureIDs.LadderDown.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.LadderDown.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_Sprite
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_sprite.bmp")));
-            mapED[MapEDTextureIDs.Sprite.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.Sprite.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_AI
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_ai.bmp")));
-            mapED[MapEDTextureIDs.AI.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.AI.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_InvisibleWall
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_invisiblewall.bmp")));
-            mapED[MapEDTextureIDs.InvisibleWall.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.InvisibleWall.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_Teleporter
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_teleporter.bmp")));
-            mapED[MapEDTextureIDs.Teleporter.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.Teleporter.ordinal()] = new ImageIcon(imageBuff);
 
             // ME_PlayerStart
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_playerstart.bmp")));
-            mapED[MapEDTextureIDs.PlayerStart.ordinal()] = new ImageIcon(imageBuff);
+            mapEditorViewport[MapEDTextureIDs.PlayerStart.ordinal()] = new ImageIcon(imageBuff);
 
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void LoadMapEditorPalette()
+    {
+        BufferedImage imageBuff;
+        try 
+        {
+            // ME_Wall
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall.bmp")));
+            mapEditorPalette[WallAssets.W_Wall.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_thin_hor.bmp")));
+            mapEditorPalette[WallAssets.W_ThinWallHor.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_thin_ver.bmp")));
+            mapEditorPalette[WallAssets.W_ThinWallVer.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_door_hor.bmp")));
+            mapEditorPalette[WallAssets.W_DoorHor.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_door_ver.bmp")));
+            mapEditorPalette[WallAssets.W_DoorVer.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_trigger.bmp")));
+            mapEditorPalette[WallAssets.W_WallTriggerChangeMap.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_ladder_up.bmp")));
+            mapEditorPalette[WallAssets.W_WallLadder.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_ladder_down.bmp")));
+            mapEditorPalette[WallAssets.W_WallLadderDown.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_invisiblewall.bmp")));
+            mapEditorPalette[WallAssets.W_WallInvisible.ordinal()] = new ImageIcon(imageBuff);
         } catch (IOException e) 
         {
             e.printStackTrace();
@@ -194,6 +235,18 @@ public class AssetManager
 
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/altar_mana.bmp")));
             sprites[SpritesAssets.S_AltarMana.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/skeleton.bmp")));
+            sprites[SpritesAssets.DS_Skeleton.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/skeleton_burnt.bmp")));
+            sprites[SpritesAssets.DS_SkeletonBurnt.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/skeleton_elite.bmp")));
+            sprites[SpritesAssets.DS_SkeletonElite.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/skeleton_lord.bmp")));
+            sprites[SpritesAssets.DS_SkeletonLord.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
         } catch (IOException e) 
         {
             e.printStackTrace();
