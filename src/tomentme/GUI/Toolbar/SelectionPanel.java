@@ -1,14 +1,40 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
+import tomentme.TomentEditor;
+import tomentme.AssetsManager.AssetManager;
+import tomentme.AssetsManager.AssetManager.TextureIDs;
+import tomentme.GUI.Elements.TileButton;
+import tomentme.GUI.Toolbar.Elements.SelectionWallFaceButton;
+import tomentme.Map.TMap;
+import tomentme.Map.WallObject;
+import tomentme.TomentEditor.EditMode;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class SelectionPanel 
 {
+    private SelectionWallFaceButton curWallFace = null;
+    public int selectedTextureArray = 0;
+    
+    private JLabel imgLabel;
+
+    // Wall
+    private JComboBox selectBox;
+    private boolean fireSelectBox = false;
+    private List<SelectionWallFaceButton> wallFaceButtons = new ArrayList<>();
+
     public SelectionPanel(JPanel toolSections)
     {
         JPanel selectedFacePanel = new JPanel();
@@ -22,71 +48,180 @@ public class SelectionPanel
         selectedFaceSelection.add(sfLabel);
         toolSections.add(selectedFaceSelection);
 
-        BufferedImage myPicture;
-        try 
-        {
-            myPicture = ImageIO.read(new File("C:/Users/silve/Desktop/wall1.bmp"));
-            ImageIcon img = new ImageIcon(myPicture);
-            Image newimg = img.getImage().getScaledInstance(64, 64,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-            JLabel picLabel = new JLabel(new ImageIcon(newimg));
-            picLabel.setPreferredSize(new Dimension(64,64));
-            selectedFacePanel.add(picLabel, BorderLayout.LINE_START);
-
-        } catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
+        imgLabel = new JLabel((AssetManager.instance.textures[1]));
+        imgLabel.setPreferredSize(new Dimension(64,64));
+        selectedFacePanel.add(imgLabel, BorderLayout.LINE_START);
 
         JPanel sbtnPnl = new JPanel();
-        JButton sbtn = new JButton("Select");
-        sbtn.setBorder(null);
-        sbtn.setPreferredSize(new Dimension(70,15));
-        sbtnPnl.add(sbtn);
+        selectBox = new JComboBox<>(TextureIDs.values());
+        selectBox.setBorder(null);
+        selectBox.setPreferredSize(new Dimension(70,25));
+
+        selectBox.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                Wall_SelectTexture();
+            }
+        });
+
+        sbtnPnl.add(selectBox);
 
         selectedFacePanel.add(sbtnPnl);
 
         JPanel pnl = new JPanel();
         pnl.setLayout(new GridLayout(0, 1));
 
-        JButton TOPBtn = new JButton("TOP");
-        JButton BOTTOMBtn = new JButton("BOTTOM");
-        JButton LEFTBtn = new JButton("LEFT");
-        JButton RIGHTBtn = new JButton("RIGHT");
-        JButton FORWARDBtn = new JButton("FORWARD");
-        JButton BACKBtn = new JButton("BACK");
+        SelectionWallFaceButton TOPBtn = new SelectionWallFaceButton(this, "TOP", WallObject.TEXTURE_ARRAY_TOP);
+        SelectionWallFaceButton BOTTOMBtn = new SelectionWallFaceButton(this, "BOTTOM", WallObject.TEXTURE_ARRAY_BOTTOM);
+        SelectionWallFaceButton LEFTBtn = new SelectionWallFaceButton(this, "LEFT", WallObject.TEXTURE_ARRAY_LEFT);
+        SelectionWallFaceButton RIGHTBtn = new SelectionWallFaceButton(this, "RIGHT", WallObject.TEXTURE_ARRAY_RIGHT);
+        SelectionWallFaceButton FORWARDBtn = new SelectionWallFaceButton(this, "FORWARD", WallObject.TEXTURE_ARRAY_UP);
+        SelectionWallFaceButton BACKBtn = new SelectionWallFaceButton(this, "BACK", WallObject.TEXTURE_ARRAY_DOWN);
 
-        TOPBtn.setPreferredSize(new Dimension(60, 15));
-        BOTTOMBtn.setPreferredSize(new Dimension(60, 15));
-        LEFTBtn.setPreferredSize(new Dimension(60, 15));
-        RIGHTBtn.setPreferredSize(new Dimension(60, 15));
-        FORWARDBtn.setPreferredSize(new Dimension(60, 15));
-        BACKBtn.setPreferredSize(new Dimension(60, 15));
+        wallFaceButtons.add(TOPBtn);
+        wallFaceButtons.add(BOTTOMBtn);
+        wallFaceButtons.add(LEFTBtn);
+        wallFaceButtons.add(RIGHTBtn);
+        wallFaceButtons.add(BACKBtn);
+        wallFaceButtons.add(FORWARDBtn);
+        wallFaceButtons.add(BACKBtn);
 
-        TOPBtn.setBorder(null);
-        BOTTOMBtn.setBorder(null);
-        LEFTBtn.setBorder(null);
-        RIGHTBtn.setBorder(null);
-        FORWARDBtn.setBorder(null);
-        BACKBtn.setBorder(null);
+        // Set first as default
+        curWallFace = TOPBtn;
+        TOPBtn.setBorder(SelectionWallFaceButton.selectedBorder);
 
-        TOPBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        BOTTOMBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        LEFTBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        RIGHTBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        FORWARDBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        BACKBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-
-
-        pnl.add(TOPBtn);
-        pnl.add(BOTTOMBtn);
-        pnl.add(LEFTBtn);
-        pnl.add(RIGHTBtn);
-        pnl.add(FORWARDBtn);
-        pnl.add(BACKBtn);
-
+        for(SelectionWallFaceButton btn : wallFaceButtons)
+            pnl.add(btn);
 
         selectedFacePanel.add(pnl, BorderLayout.LINE_END);
 
         toolSections.add(selectedFacePanel);
+    }
+
+    public void UpdatePanel(EditMode mode, TileButton tile)
+    {
+        TMap curMap = TomentEditor.instance.currentMap;
+
+        switch (mode)
+        {
+            case AI:
+
+                break;
+
+            case FLOOR_CEILING:
+
+                break;
+
+            case SPRITE:
+
+                break;
+
+            case WALL:
+
+                WallObject wallObj = null;
+                switch(TomentEditor.instance.GetCurrentFloor())
+                {
+                    case 0:
+                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 1:
+                        wallObj = curMap.level1[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 2:
+                        wallObj = curMap.level2[tile.GetY()][tile.GetX()];
+                        break;
+
+                    default:
+                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                        break;
+                }
+
+                imgLabel.setIcon(AssetManager.instance.textures[wallObj.textureArray[selectedTextureArray]]);
+
+                fireSelectBox = false;
+                selectBox.setSelectedIndex(wallObj.textureArray[selectedTextureArray]);
+                fireSelectBox = true;
+
+                // Update img label
+                if(wallObj.assetID > 0)
+                {
+                    for(SelectionWallFaceButton btn : wallFaceButtons)
+                        btn.setVisible(true);
+
+                    selectBox.setVisible(true);
+                }
+                else
+                {
+                    for(SelectionWallFaceButton btn : wallFaceButtons)
+                        btn.setVisible(false);
+
+                    selectBox.setVisible(false);
+                }
+                
+                break;
+
+            default:
+                break;
+            
+        }
+    }
+
+	public void Wall_ChangeTextureArray(SelectionWallFaceButton source) 
+    {
+        if(curWallFace != null)
+            curWallFace.setBorder(SelectionWallFaceButton.notSelectedBorder);
+
+        curWallFace = source;
+        source.setBorder(SelectionWallFaceButton.selectedBorder);
+
+        selectedTextureArray = source.textureArrayValue;
+
+        // Update panel
+        UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
+	}
+
+    public void Wall_SelectTexture()
+    {
+        if(!fireSelectBox)
+            return;
+
+        int selection = selectBox.getSelectedIndex();
+
+        System.out.println(selection);
+
+        TMap curMap = TomentEditor.instance.currentMap;
+        
+        TileButton tile = TomentEditor.instance.GetCurrentTileButton();
+
+        if(tile != null)
+        {
+            WallObject wallObj = null;
+            switch(TomentEditor.instance.GetCurrentFloor())
+            {
+                case 0:
+                    wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                    break;
+
+                case 1:
+                    wallObj = curMap.level1[tile.GetY()][tile.GetX()];
+                    break;
+
+                case 2:
+                    wallObj = curMap.level2[tile.GetY()][tile.GetX()];
+                    break;
+
+                default:
+                    wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                    break;
+            }
+
+            wallObj.textureArray[selectedTextureArray] = selection;
+
+            UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
+        }
     }
 }
