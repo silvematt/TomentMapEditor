@@ -61,7 +61,46 @@ public class AssetManager
         W_WallTriggerChangeMap,
         W_WallLadder,
         W_WallLadderDown,
-        W_WallInvisible
+        W_WallInvisible;
+
+        public static String GetEnumName(int id)
+        {
+            switch(id)
+            {
+                case 0:
+                    return "EMPTY";
+
+                case 1:
+                    return "WALL";
+
+                case 2:
+                    return "THIN H";
+
+                case 3:
+                    return "THIN V";
+                
+                case 4:
+                    return "DOOR H";
+
+                case 5:
+                    return "DOOR V";
+
+                case 6:
+                    return "TRIGGER";
+
+                case 7:
+                    return "LADDER U";
+
+                case 8:
+                    return "LADDER D";
+
+                case 9:
+                    return "INVISIBLE";
+
+                default:
+                    return "NULL";
+            }
+        }
     };
 
     public enum SpritesAssets

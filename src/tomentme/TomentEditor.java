@@ -15,6 +15,10 @@ import tomentme.Map.TMap;
 
 public class TomentEditor extends JPanel
 {
+    // Defines
+    public static final int DEF_WINDOW_W = 800;
+    public static final int DEF_WINDOW_H = 600;
+    
     public static TomentEditor instance;
 
     // Tools
@@ -84,7 +88,8 @@ public class TomentEditor extends JPanel
         if(curSelectedButton != null)
             curSelectedButton.Unselect();
 
-        viewer.SetSelectedTileValue("("+tile.GetX()+","+tile.GetY()+")");
+        viewer.UpdateViewer(curEditMode, tile);
+
         tile.setBorder(TileButton.selectedBorder);
         tile.SetSelected(true);
 
@@ -140,6 +145,6 @@ public class TomentEditor extends JPanel
 
         // Update all
         commands.SetCurModeText(curEditMode);
-        palette.OnStateChanges(curEditMode);
+        palette.Update(curEditMode);
     }
 }

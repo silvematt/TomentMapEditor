@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import tomentme.AssetsManager.AssetManager;
 import tomentme.AssetsManager.AssetManager.SpritesAssets;
@@ -16,7 +15,7 @@ import tomentme.TomentEditor.EditMode;
 
 public class PalettePanel 
 {
-    JPanel scrollContentPanel;
+    private JPanel scrollContentPanel;
 
     private List<JComponent> wallsElements = new ArrayList<JComponent>();
     private List<JComponent> spritesElements = new ArrayList<JComponent>();
@@ -84,7 +83,7 @@ public class PalettePanel
         HideAll();
     }
 
-    public void OnStateChanges(EditMode mode)
+    public void Update(EditMode mode)
     {
         HideAll();
         editWall.setBorder(ChangeEditModeButton.notSelectedBorder);
