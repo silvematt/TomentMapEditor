@@ -32,7 +32,6 @@ public class Viewport
                 tiles[j][i] = btn;
             }
 
-
         content.add(viewport);
     }
 

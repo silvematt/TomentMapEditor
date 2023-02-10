@@ -142,6 +142,7 @@ public class AssetManager
         LoadMapEditorViewport();
         LoadMapEditorPalette();
 
+        LoadTexures();
         LoadSprites();
     }
 
@@ -228,6 +229,50 @@ public class AssetManager
 
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_invisiblewall.bmp")));
             mapEditorPalette[WallAssets.W_WallInvisible.ordinal()] = new ImageIcon(imageBuff);
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void LoadTexures()
+    {
+        BufferedImage imageBuff;
+        try 
+        {
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/wall1.bmp")));
+            textures[TextureIDs.WallBrick1.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/wall1alt.bmp")));
+            textures[TextureIDs.WallBrick1Dark.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/floor.bmp")));
+            textures[TextureIDs.FloorBrick1.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/ceiling1.bmp")));
+            textures[TextureIDs.CeilingWood1.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/wall2.bmp")));
+            textures[TextureIDs.Wall2.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/gate.bmp")));
+            textures[TextureIDs.Gate1.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/gateAlt.bmp")));
+            textures[TextureIDs.Gate1Alt.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/castledoors.bmp")));
+            textures[TextureIDs.CastleDoor.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/wall1_ladder.bmp")));
+            textures[TextureIDs.Wall1Ladder.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/floor2.bmp")));
+            textures[TextureIDs.FloorBrick2.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/floor_dirt.bmp")));
+            textures[TextureIDs.FloorDirt1.ordinal()] = new ImageIcon(imageBuff);
+
         } catch (IOException e) 
         {
             e.printStackTrace();

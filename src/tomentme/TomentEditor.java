@@ -37,6 +37,12 @@ public class TomentEditor extends JPanel
 
     // Application Logic
     private TileButton curSelectedButton;
+
+    public TileButton GetCurrentTileButton()
+    {
+        return curSelectedButton;
+    }
+    
     public enum EditMode
     {
         WALL,
@@ -78,8 +84,10 @@ public class TomentEditor extends JPanel
         // Testing level load
         currentMap = new TMap();
         currentMap.LoadMap("lvl1");
-
+        
         SetMode(EditMode.WALL);
+        
+        SelectTile(viewport.tiles[0][0]);
         viewport.UpdateViewport();
     }
 
@@ -89,6 +97,7 @@ public class TomentEditor extends JPanel
             curSelectedButton.Unselect();
 
         viewer.UpdateViewer(curEditMode, tile);
+        selection.UpdatePanel(curEditMode, tile);
 
         tile.setBorder(TileButton.selectedBorder);
         tile.SetSelected(true);
@@ -146,5 +155,15 @@ public class TomentEditor extends JPanel
         // Update all
         commands.SetCurModeText(curEditMode);
         palette.Update(curEditMode);
+    }
+
+    public EditMode GetMode()
+    {
+        return curEditMode;
+    }
+
+    public TileButton GetCurTileButton()
+    {
+        return curSelectedButton;
     }
 }

@@ -5,7 +5,8 @@ import javax.swing.*;
 
 import tomentme.*;
 import tomentme.GUI.Elements.TileButton;
-import tomentme.GUI.Toolbar.Elements.ChangeEditModeButton;        
+import tomentme.GUI.Toolbar.Elements.ChangeEditModeButton;
+import tomentme.GUI.Toolbar.Elements.SelectionWallFaceButton;        
 
 public class GUI 
 {
@@ -28,7 +29,8 @@ public class GUI
         // Initialize
         TileButton.InitializeGUIMembers();
         ChangeEditModeButton.InitializeGUIMembers();
-
+        SelectionWallFaceButton.InitializeGUIMembers();
+        
         TomentEditor editor = new TomentEditor();
         AddMenuBar();
         frame.add(editor);
