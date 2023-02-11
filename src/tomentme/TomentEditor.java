@@ -42,7 +42,7 @@ public class TomentEditor extends JPanel
     {
         return curSelectedButton;
     }
-    
+
     public enum EditMode
     {
         WALL,
@@ -155,6 +155,10 @@ public class TomentEditor extends JPanel
         // Update all
         commands.SetCurModeText(curEditMode);
         palette.Update(curEditMode);
+        viewer.UpdateViewer(curEditMode, curSelectedButton);
+        selection.UpdatePanel(curEditMode, curSelectedButton);
+        
+        toolSections.repaint();
     }
 
     public EditMode GetMode()
