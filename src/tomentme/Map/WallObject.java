@@ -19,4 +19,14 @@ public class WallObject
         this.textureArray = new int[6];
         this.data = new String();
     }
+
+    public void PasteValues(WallObject other)
+    {
+        this.assetID = other.assetID;
+        
+        for(int i = 0; i < textureArray.length; i++)
+            this.textureArray[i] = other.textureArray[i];
+
+        this.data = new String(other.data);
+    }
 }

@@ -5,8 +5,12 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.swing.*;
 
+import tomentme.TomentEditor;
 import tomentme.GUI.Elements.CommandsPanel.*;
+import tomentme.Map.WallObject;
 import tomentme.TomentEditor.EditMode;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class CommandsPanel 
 {
@@ -14,6 +18,10 @@ public class CommandsPanel
 
     private JLabel curMode;
     private JLabel curPaletteItem;
+
+    public boolean isCopying;
+    public WallObject copiedWall;
+    public int copiedInt;
 
     public CommandsPanel(JPanel toolSections)
     {
@@ -43,8 +51,22 @@ public class CommandsPanel
         curMode = new JLabel("Current mode: WALL");
         curPaletteItem = new JLabel("Seleted Item: NULL");
 
+        JPanel buttonsPanel = new JPanel();
+        JButton copyButton = new JButton("Copy");
+        copyButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                TomentEditor.instance.CopySelectedTile();
+            }
+        });        
+        buttonsPanel.add(copyButton);
+        buttonsPanel.add(new JButton("Erase"));
+
         incRightPanel.add(curMode);
         incRightPanel.add(curPaletteItem);
+        incRightPanel.add(buttonsPanel);
 
         commandsPanel.add(incRightPanel);
         
@@ -86,5 +108,18 @@ public class CommandsPanel
     public void SetCurSelectedItem(String str)
     {
         curPaletteItem.setText("Selected Item: " + str);
+    }
+
+    public void SetIsCopying(boolean val)
+    {
+        isCopying = val;
+
+        if(isCopying)
+            curPaletteItem.setText("COPYING!");
+    }
+
+    public boolean IsCopying()
+    {
+        return isCopying;
     }
 }

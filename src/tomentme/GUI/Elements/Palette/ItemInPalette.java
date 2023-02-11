@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import tomentme.TomentEditor;
+import tomentme.Map.WallObject;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -24,7 +25,7 @@ public class ItemInPalette extends JPanel
     };
 
     public ItemType iType;
-    String iName;
+    public String iName;
     public int iID;
 
     public ItemInPalette(ImageIcon icon, int id, String name, ItemType t)

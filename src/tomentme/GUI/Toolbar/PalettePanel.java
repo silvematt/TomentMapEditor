@@ -100,7 +100,6 @@ public class PalettePanel
             case AI:
                 for(JComponent c : aiElements)
                     scrollContentPanel.add(c);
-
                 editAI.setBorder(ChangeEditModeButton.selectedBorder);
                 break;
 
@@ -139,6 +138,7 @@ public class PalettePanel
         selectedItem.Select();
 
         TomentEditor.instance.GetCommandsPanel().SetCurSelectedItem(selectedItem.GetName());
+        TomentEditor.instance.GetCommandsPanel().SetIsCopying(false);
     }
 
     public void UnselectItemInPalette()
@@ -165,6 +165,10 @@ public class PalettePanel
 
     private void FillContentPane_Walls(JPanel scrollContentPanel)
     {
+        ItemInPalette nothing = new ItemInPalette(AssetManager.instance.mapEditorPalette[WallAssets.EMPTY.ordinal()], WallAssets.EMPTY.ordinal(), "EMPTY", ItemType.WALL);
+        scrollContentPanel.add(nothing);
+        wallsElements.add(nothing);
+
         ItemInPalette wall = new ItemInPalette(AssetManager.instance.mapEditorPalette[WallAssets.W_Wall.ordinal()], WallAssets.W_Wall.ordinal(), "Wall     ", ItemType.WALL);
         scrollContentPanel.add(wall);
         wallsElements.add(wall);
@@ -204,6 +208,10 @@ public class PalettePanel
 
     private void FillContentPane_Sprites(JPanel scrollContentPanel)
     {
+        ItemInPalette nothing = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.S_EMPTY.ordinal()], SpritesAssets.S_EMPTY.ordinal(), "EMPTY", ItemType.SPRITE);
+        scrollContentPanel.add(nothing);
+        spritesElements.add(nothing);
+
         ItemInPalette barrel = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.S_Barrel1.ordinal()],SpritesAssets.S_Barrel1.ordinal(), "Barrel", ItemType.SPRITE);
         scrollContentPanel.add(barrel);
         spritesElements.add(barrel);
@@ -255,6 +263,10 @@ public class PalettePanel
 
     private void FillContentPane_AI(JPanel scrollContentPanel)
     {
+        ItemInPalette nothing = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.S_EMPTY.ordinal()], SpritesAssets.S_EMPTY.ordinal(), "EMPTY     ", ItemType.AI);
+        scrollContentPanel.add(nothing);
+        aiElements.add(nothing);
+
         ItemInPalette skeleton = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.DS_Skeleton.ordinal()],SpritesAssets.DS_Skeleton.ordinal(), "Skeleton", ItemType.AI);
         scrollContentPanel.add(skeleton);
         aiElements.add(skeleton);

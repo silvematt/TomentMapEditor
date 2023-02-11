@@ -89,6 +89,10 @@ public class Viewport
                         tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.InvisibleWall.ordinal()]);
                     else if(wallID == WallAssets.W_WallTriggerChangeMap.ordinal())
                         tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.Teleporter.ordinal()]);
+                    else if(wallID == WallAssets.W_ThinWallHor.ordinal())
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.ThinHor.ordinal()]);
+                    else if(wallID == WallAssets.W_ThinWallVer.ordinal())
+                        tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.ThinVer.ordinal()]);
                     else
                         tiles[x][y].setIcon(AssetManager.instance.mapEditorViewport[MapEDTextureIDs.Wall.ordinal()]);
                 }

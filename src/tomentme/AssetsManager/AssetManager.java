@@ -47,7 +47,9 @@ public class AssetManager
         AI,
         InvisibleWall,
         Teleporter,
-        PlayerStart
+        PlayerStart,
+        ThinHor,
+        ThinVer
     };
 
     public enum WallAssets
@@ -260,6 +262,12 @@ public class AssetManager
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_playerstart.bmp")));
             mapEditorViewport[MapEDTextureIDs.PlayerStart.ordinal()] = new ImageIcon(imageBuff);
 
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_thin_hor.bmp")));
+            mapEditorViewport[MapEDTextureIDs.ThinHor.ordinal()] = new ImageIcon(imageBuff);
+
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_thin_ver.bmp")));
+            mapEditorViewport[MapEDTextureIDs.ThinVer.ordinal()] = new ImageIcon(imageBuff);
+
         } catch (IOException e) 
         {
             e.printStackTrace();
@@ -271,6 +279,10 @@ public class AssetManager
         BufferedImage imageBuff;
         try 
         {
+             // ME_EMPTY
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_empty.bmp")));
+            mapEditorPalette[MapEDTextureIDs.EMPTY.ordinal()] = new ImageIcon(imageBuff);
+
             // ME_Wall
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall.bmp")));
             mapEditorPalette[WallAssets.W_Wall.ordinal()] = new ImageIcon(imageBuff);
@@ -353,6 +365,10 @@ public class AssetManager
         BufferedImage imageBuff;
         try 
         {
+            // ME_EMPTY
+            imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_empty.bmp")));
+            sprites[SpritesAssets.S_EMPTY.ordinal()] = new ImageIcon(imageBuff);
+
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/barrel.bmp")));
             sprites[SpritesAssets.S_Barrel1.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
