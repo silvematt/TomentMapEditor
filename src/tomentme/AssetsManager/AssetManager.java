@@ -125,7 +125,76 @@ public class AssetManager
         S_AltarMana,
         DS_SkeletonBurnt,
         S_PickupGreatsword,
-        DS_SkeletonLord
+        DS_SkeletonLord;
+
+        public static String GetEnumName(int id)
+        {
+            switch(id)
+            {
+                case 0:
+                    return "EMPTY";
+
+                case 1:
+                    return "Barrel";
+
+                case 2:
+                    return "Campfire";
+
+                case 3:
+                    return "[AI] Skeleton";
+
+                case 4:
+                    return "Fireball";
+                
+                case 5:
+                    return "Pickup Axe";
+
+                case 6:
+                    return "Pickup Health";
+
+                case 7:
+                    return "Pickup Mana";
+
+                case 8:
+                    return "Ice Dart";
+
+                case 9:
+                    return "Tome Fireball";
+
+                case 10:
+                    return "Tome Ice Dart";
+
+                case 11:
+                    return "Table";
+
+                case 12:
+                    return "Skull";
+
+                case 13:
+                    return "Skeleton Elite";
+
+                case 14:
+                    return "Altar Empty";
+
+                case 15:
+                    return "Altar Health";
+
+                case 16:
+                    return "Altar Mana";
+
+                case 17:
+                    return "Skeleton Burnt";
+
+                case 18:
+                    return "Pickup Greatsword";
+
+                case 19:
+                    return "Skeleton Lord";
+
+                default:
+                    return "NULL";
+            }
+        }
     }
 
     // Map-Editor specific

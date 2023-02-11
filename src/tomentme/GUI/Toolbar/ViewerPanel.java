@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.*;
 
 import tomentme.TomentEditor;
+import tomentme.AssetsManager.AssetManager.SpritesAssets;
 import tomentme.AssetsManager.AssetManager.WallAssets;
 import tomentme.GUI.Elements.TileButton;
 import tomentme.Map.TMap;
@@ -114,6 +115,29 @@ public class ViewerPanel
 
                 for(JComponent cmp : wallElements)
                     viewerContentPanel.remove(cmp);
+
+                int spriteObj = 0;
+                switch(TomentEditor.instance.GetCurrentFloor())
+                {
+                    case 0:
+                        spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 1:
+                        spriteObj = curMap.spritesMapLevel1[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 2:
+                        spriteObj = curMap.spritesMapLevel2[tile.GetY()][tile.GetX()];
+                        break;
+
+                    default:
+                        spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
+                        break;
+                }
+
+                spritesLabel.setText("Sprite ID: " + spriteObj);
+                spriteName.setText("Name: " + SpritesAssets.GetEnumName(spriteObj));
                 break;
 
             case WALL:

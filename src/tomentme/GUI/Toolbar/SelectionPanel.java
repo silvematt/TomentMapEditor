@@ -311,6 +311,7 @@ public class SelectionPanel
 
             UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
             TomentEditor.instance.GetViewport().UpdateViewport();
+            TomentEditor.instance.GetViewerPanel().UpdateViewer(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
         }
     }
 }
