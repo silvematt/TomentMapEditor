@@ -10,7 +10,7 @@ import tomentme.AssetsManager.AssetManager;
 import tomentme.AssetsManager.AssetManager.SpritesAssets;
 import tomentme.AssetsManager.AssetManager.TextureIDs;
 import tomentme.GUI.Elements.TileButton;
-import tomentme.GUI.Toolbar.Elements.SelectionWallFaceButton;
+import tomentme.GUI.Elements.SelectionPanel.SelectionWallFaceButton;
 import tomentme.Map.TMap;
 import tomentme.Map.WallObject;
 import tomentme.TomentEditor.EditMode;
@@ -45,7 +45,7 @@ public class SelectionPanel
     {
         JPanel selectedFacePanel = new JPanel();
         selectedFacePanel.setLayout(new FlowLayout());
-        selectedFacePanel.setBackground(Color.YELLOW);
+        selectedFacePanel.setBackground(Color.GRAY);
 
         JPanel selectedFaceSelection = new JPanel();
         selectedFaceSelection.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -91,6 +91,7 @@ public class SelectionPanel
         selectedFacePanel.add(sbtnPnl);
 
         wallFaceButtonsPanel = new JPanel();
+        wallFaceButtonsPanel.setBackground(null);
         wallFaceButtonsPanel.setLayout(new GridLayout(0, 1));
 
         SelectionWallFaceButton TOPBtn = new SelectionWallFaceButton(this, "TOP", WallObject.TEXTURE_ARRAY_TOP);
@@ -129,14 +130,12 @@ public class SelectionPanel
 
         switch (mode)
         {
-            case AI:
-
-                break;
 
             case FLOOR_CEILING:
 
                 break;
 
+            case AI:
             case SPRITE:
                 int spriteObj = 0;
                 switch(TomentEditor.instance.GetCurrentFloor())

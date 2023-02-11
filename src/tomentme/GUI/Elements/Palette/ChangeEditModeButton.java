@@ -1,4 +1,4 @@
-package tomentme.GUI.Toolbar.Elements;
+package tomentme.GUI.Elements.Palette;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;

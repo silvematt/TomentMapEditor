@@ -54,6 +54,17 @@ public class TileButton extends JButton
             ml = new java.awt.event.MouseAdapter()
             {
                 @Override
+                public void mousePressed(MouseEvent e) 
+                {
+                    TileButton c = (TileButton)e.getComponent();     
+
+                    if(SwingUtilities.isRightMouseButton(e))
+                    {
+                        TomentEditor.instance.DrawSelectedPaletteTile(c);
+                    }
+                }
+
+                @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt)
                 {            
                     TileButton c = (TileButton)evt.getComponent();     

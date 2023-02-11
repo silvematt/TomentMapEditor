@@ -37,7 +37,7 @@ public class ViewerPanel
     {
         JPanel viewerPanel = new JPanel();
         viewerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        viewerPanel.setBackground(Color.CYAN);
+        viewerPanel.setBackground(Color.GRAY);
         
         JPanel viewerPanelSelection = new JPanel();
         viewerPanelSelection.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -101,14 +101,11 @@ public class ViewerPanel
 
         switch (mode)
         {
-            case AI:
-
-                break;
-
             case FLOOR_CEILING:
 
                 break;
 
+            case AI:
             case SPRITE:
                 for(JComponent cmp : spritesElements)
                     viewerContentPanel.add(cmp);

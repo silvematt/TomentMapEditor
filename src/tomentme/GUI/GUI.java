@@ -5,8 +5,8 @@ import javax.swing.*;
 
 import tomentme.*;
 import tomentme.GUI.Elements.TileButton;
-import tomentme.GUI.Toolbar.Elements.ChangeEditModeButton;
-import tomentme.GUI.Toolbar.Elements.SelectionWallFaceButton;        
+import tomentme.GUI.Elements.Palette.ChangeEditModeButton;
+import tomentme.GUI.Elements.SelectionPanel.SelectionWallFaceButton;        
 
 public class GUI 
 {

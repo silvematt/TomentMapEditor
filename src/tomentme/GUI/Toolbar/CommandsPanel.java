@@ -1,6 +1,8 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
+import java.util.concurrent.ConcurrentSkipListSet;
+
 import javax.swing.*;
 
 import tomentme.GUI.Elements.CommandsPanel.*;
@@ -11,11 +13,12 @@ public class CommandsPanel
     private JLabel curFloorText;
 
     private JLabel curMode;
+    private JLabel curPaletteItem;
 
     public CommandsPanel(JPanel toolSections)
     {
         JPanel commandsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        commandsPanel.setBackground(Color.black);
+        commandsPanel.setBackground(Color.GRAY);
 
         JPanel incLeftPanel = new JPanel();
         incLeftPanel.setLayout(new GridLayout(3,1));
@@ -34,11 +37,15 @@ public class CommandsPanel
         commandsPanel.add(incLeftPanel);
         
         JPanel incRightPanel = new JPanel();
-        incRightPanel.setBackground(Color.gray);
+        incRightPanel.setBackground(Color.white);
         incRightPanel.setPreferredSize(new Dimension(150, 100));
         
         curMode = new JLabel("Current mode: WALL");
+        curPaletteItem = new JLabel("Seleted Item: NULL");
+
         incRightPanel.add(curMode);
+        incRightPanel.add(curPaletteItem);
+
         commandsPanel.add(incRightPanel);
         
         toolSections.add(commandsPanel);
@@ -74,5 +81,10 @@ public class CommandsPanel
                 break;
 
         }
+    }
+
+    public void SetCurSelectedItem(String str)
+    {
+        curPaletteItem.setText("Selected Item: " + str);
     }
 }

@@ -8,8 +8,10 @@ import javax.swing.*;
 
 import tomentme.AssetsManager.AssetManager;
 import tomentme.GUI.Elements.*;
+import tomentme.GUI.Elements.Palette.ItemInPalette;
 import tomentme.GUI.Toolbar.*;
 import tomentme.Map.TMap;
+import tomentme.Map.WallObject;
 
 
 
@@ -67,7 +69,7 @@ public class TomentEditor extends JPanel
     {
         toolSections = new JPanel();
         toolSections.setLayout(new BoxLayout(toolSections, BoxLayout.Y_AXIS));
-        toolSections.setBackground(Color.red);
+        toolSections.setBackground(Color.GRAY);
 
         AssetManager assetManager = new AssetManager();
         AssetManager.instance = assetManager;
@@ -103,6 +105,67 @@ public class TomentEditor extends JPanel
         tile.SetSelected(true);
 
         curSelectedButton = tile;
+    }
+
+    public void DrawSelectedPaletteTile(TileButton tile)
+    {
+        ItemInPalette itemToDraw = palette.selectedItem;
+
+        if(itemToDraw == null)
+            return;
+
+        TMap curMap = TomentEditor.instance.currentMap;
+        
+        switch(itemToDraw.iType)
+        {
+            case WALL:
+                WallObject wallObj = null;
+                switch(TomentEditor.instance.GetCurrentFloor())
+                {
+                    case 0:
+                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 1:
+                        wallObj = curMap.level1[tile.GetY()][tile.GetX()];
+                        break;
+
+                    case 2:
+                        wallObj = curMap.level2[tile.GetY()][tile.GetX()];
+                        break;
+
+                    default:
+                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
+                        break;
+                }
+
+                wallObj.assetID = itemToDraw.iID;
+                break;
+
+            case AI:
+            case SPRITE:
+                switch(TomentEditor.instance.GetCurrentFloor())
+                {
+                    case 0:
+                        curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = itemToDraw.iID;
+                        break;
+
+                    case 1:
+                        curMap.spritesMapLevel1[tile.GetY()][tile.GetX()] = itemToDraw.iID;
+                        break;
+
+                    case 2:
+                        curMap.spritesMapLevel2[tile.GetY()][tile.GetX()] = itemToDraw.iID;
+                        break;
+
+                    default:
+                        curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = itemToDraw.iID;
+                        break;
+                }
+                break;
+        }
+        
+        UpdateAll();
     }
 
     // Public getters
@@ -152,11 +215,20 @@ public class TomentEditor extends JPanel
     {
         curEditMode = mode;
 
+        palette.UnselectItemInPalette();
+
+        // Update all
+        UpdateAll();
+    }
+
+    public void UpdateAll()
+    {
         // Update all
         commands.SetCurModeText(curEditMode);
         palette.Update(curEditMode);
         viewer.UpdateViewer(curEditMode, curSelectedButton);
         selection.UpdatePanel(curEditMode, curSelectedButton);
+        viewport.UpdateViewport();
         
         toolSections.repaint();
     }
