@@ -364,4 +364,26 @@ public class TMap
             }
         }
     }
+
+    public void RestoreFromMemento(TMapMemento memento)
+    {
+        System.out.println("restoring");
+        TMap mementoMap = memento.GetState();
+
+        for(int y = 0; y < TMap.MAP_HEIGHT; y++)
+            for(int x = 0; x < TMap.MAP_WIDTH; x++)
+            {
+                this.level0[y][x] = mementoMap.level0[y][x];
+                this.level1[y][x] = mementoMap.level1[y][x];
+                this.level2[y][x] = mementoMap.level2[y][x];
+
+                this.spritesMapLevel0[y][x] = mementoMap.spritesMapLevel0[y][x];
+                this.spritesMapLevel1[y][x] = mementoMap.spritesMapLevel1[y][x];
+                this.spritesMapLevel2[y][x] = mementoMap.spritesMapLevel2[y][x];
+
+                this.playerStartingGridX = mementoMap.playerStartingGridX;
+                this.playerStartingGridY = mementoMap.playerStartingGridY;
+                this.playerStartingLevel = mementoMap.playerStartingLevel;
+            }
+    }
 }

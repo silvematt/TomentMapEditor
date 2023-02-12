@@ -3,6 +3,8 @@ package tomentme;
 import javax.swing.JPanel;
 
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -10,7 +12,7 @@ import tomentme.AssetsManager.AssetManager;
 import tomentme.GUI.Elements.*;
 import tomentme.GUI.Elements.Palette.ItemInPalette;
 import tomentme.GUI.Toolbar.*;
-import tomentme.Map.TMap;
+import tomentme.Map.*;
 import tomentme.Map.WallObject;
 
 
@@ -39,6 +41,9 @@ public class TomentEditor extends JPanel
 
     // Application Logic
     private TileButton curSelectedButton;
+
+    private int stateIndx = -1;
+    private List<TMapMemento> states = new ArrayList<>();
 
     public TileButton GetCurrentTileButton()
     {
@@ -110,7 +115,10 @@ public class TomentEditor extends JPanel
     public void DrawSelectedPaletteTile(TileButton tile)
     {
         TMap curMap = TomentEditor.instance.currentMap;
+        
+        SaveMapState();
 
+        System.out.println("doing");
         if(commands.IsCopying())
         {
             switch(curEditMode)
@@ -276,5 +284,22 @@ public class TomentEditor extends JPanel
     public TileButton GetCurTileButton()
     {
         return curSelectedButton;
+    }
+
+    public void SaveMapState()
+    {
+        stateIndx++;
+        states.add(stateIndx, new TMapMemento(currentMap));
+    }
+
+    public void RestoreToPrevious()
+    {
+        if(stateIndx >= 0)
+        {
+            currentMap.RestoreFromMemento(states.get(stateIndx));
+            stateIndx--;
+        }
+
+        UpdateAll();
     }
 }

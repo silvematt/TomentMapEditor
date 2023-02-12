@@ -59,8 +59,20 @@ public class CommandsPanel
                 TomentEditor.instance.CopySelectedTile();
             }
         });        
+
+        JButton previousBtn = new JButton("<-");
+        previousBtn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                TomentEditor.instance.RestoreToPrevious();
+            }
+        });        
+
+
         buttonsPanel.add(copyButton);
-        buttonsPanel.add(new JButton("Erase"));
+        buttonsPanel.add(previousBtn);
 
         incRightPanel.add(curMode);
         incRightPanel.add(curPaletteItem);
