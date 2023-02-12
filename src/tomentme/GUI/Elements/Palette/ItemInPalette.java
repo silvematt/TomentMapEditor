@@ -1,17 +1,10 @@
 package tomentme.GUI.Elements.Palette;
 
 import java.awt.Color;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import tomentme.TomentEditor;
-import tomentme.Map.WallObject;
-
 import javax.swing.*;
 import java.awt.event.*;
+
+import tomentme.TomentEditor;
 
 public class ItemInPalette extends JPanel 
 {

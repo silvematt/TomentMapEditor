@@ -115,67 +115,32 @@ public class TomentEditor extends JPanel
         {
             switch(curEditMode)
             {
-                case AI:
-                    break;
                 case FLOOR_CEILING:
                     break;
+
+                case AI:
                 case SPRITE:
+                    Utilities.SetInSpritesMap(currentFloor, tile.GetY(), tile.GetX(), commands.copiedInt);
                     break;
+
                 case WALL:
-                    switch(TomentEditor.instance.GetCurrentFloor())
-                    {
-                        case 0:
-                            curMap.level0[tile.GetY()][tile.GetX()].PasteValues(commands.copiedWall);
-                            break;
-
-                        case 1:
-                            curMap.level1[tile.GetY()][tile.GetX()].PasteValues(commands.copiedWall);
-                            break;
-
-                        case 2:
-                            curMap.level2[tile.GetY()][tile.GetX()].PasteValues(commands.copiedWall);
-                            break;
-
-                        default:
-                            curMap.level0[tile.GetY()][tile.GetX()].PasteValues(commands.copiedWall);
-                            break;
-                    }
+                    Utilities.SetWallParse(currentFloor, tile.GetY(), tile.GetX(), commands.copiedWall);
                     break;
                 default:
                     break;
             }
         }
-        else
+        else // adding from palette
         {
             ItemInPalette itemToDraw = palette.selectedItem;
 
             if(itemToDraw == null)
                 return;
-
-            
             
             switch(itemToDraw.iType)
             {
                 case WALL:
-                    WallObject wallObj = null;
-                    switch(TomentEditor.instance.GetCurrentFloor())
-                    {
-                        case 0:
-                            wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                            break;
-
-                        case 1:
-                            wallObj = curMap.level1[tile.GetY()][tile.GetX()];
-                            break;
-
-                        case 2:
-                            wallObj = curMap.level2[tile.GetY()][tile.GetX()];
-                            break;
-
-                        default:
-                            wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                            break;
-                    }
+                    WallObject wallObj = Utilities.GetWallFromMap(currentFloor, tile.GetY(), tile.GetX());
 
                     wallObj.assetID = itemToDraw.iID;
 
@@ -186,24 +151,10 @@ public class TomentEditor extends JPanel
 
                 case AI:
                 case SPRITE:
-                    switch(TomentEditor.instance.GetCurrentFloor())
-                    {
-                        case 0:
-                            curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = itemToDraw.iID;
-                            break;
+                    Utilities.SetInSpritesMap(currentFloor, tile.GetY(), tile.GetX(), itemToDraw.iID);
+                    break;
 
-                        case 1:
-                            curMap.spritesMapLevel1[tile.GetY()][tile.GetX()] = itemToDraw.iID;
-                            break;
-
-                        case 2:
-                            curMap.spritesMapLevel2[tile.GetY()][tile.GetX()] = itemToDraw.iID;
-                            break;
-
-                        default:
-                            curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = itemToDraw.iID;
-                            break;
-                    }
+                default:
                     break;
             }
         }
@@ -216,13 +167,19 @@ public class TomentEditor extends JPanel
     {
         switch(curEditMode)
         {
-            case AI:
-                break;
-
             case FLOOR_CEILING:
                 break;
 
+            case AI:
             case SPRITE:
+                // If selected, get the selected tile
+                if(curSelectedButton == null)
+                    return;
+
+                commands.SetIsCopying(true);
+
+                int sprite = Utilities.GetSpriteFromMap(TomentEditor.instance.GetCurrentFloor(), curSelectedButton.GetY(), curSelectedButton.GetX());
+                commands.copiedInt = sprite;
                 break;
 
             case WALL:
@@ -231,28 +188,8 @@ public class TomentEditor extends JPanel
                     return;
 
                 commands.SetIsCopying(true);
-                TMap curMap = TomentEditor.instance.currentMap;
 
-                WallObject wallObj = null;
-                switch(TomentEditor.instance.GetCurrentFloor())
-                {
-                    case 0:
-                        wallObj = curMap.level0[curSelectedButton.GetY()][curSelectedButton.GetX()];
-                        break;
-
-                    case 1:
-                        wallObj = curMap.level1[curSelectedButton.GetY()][curSelectedButton.GetX()];
-                        break;
-
-                    case 2:
-                        wallObj = curMap.level2[curSelectedButton.GetY()][curSelectedButton.GetX()];
-                        break;
-
-                    default:
-                        wallObj = curMap.level0[curSelectedButton.GetY()][curSelectedButton.GetX()];
-                        break;
-                }
-                
+                WallObject wallObj = Utilities.GetWallFromMap(TomentEditor.instance.GetCurrentFloor(), curSelectedButton.GetY(), curSelectedButton.GetX());
                 commands.copiedWall = wallObj;
                 break;
 

@@ -268,7 +268,8 @@ public class AssetManager
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_wall_thin_ver.bmp")));
             mapEditorViewport[MapEDTextureIDs.ThinVer.ordinal()] = new ImageIcon(imageBuff);
 
-        } catch (IOException e) 
+        } 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -310,7 +311,8 @@ public class AssetManager
 
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/me_palette_invisiblewall.bmp")));
             mapEditorPalette[WallAssets.W_WallInvisible.ordinal()] = new ImageIcon(imageBuff);
-        } catch (IOException e) 
+        } 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -354,7 +356,8 @@ public class AssetManager
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/floor_dirt.bmp")));
             textures[TextureIDs.FloorDirt1.ordinal()] = new ImageIcon(imageBuff);
 
-        } catch (IOException e) 
+        } 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -416,7 +419,8 @@ public class AssetManager
 
             imageBuff = ImageIO.read(new File(Main.path + ("/Data/resources/skeleton_lord.bmp")));
             sprites[SpritesAssets.DS_SkeletonLord.ordinal()] = new ImageIcon(new ImageIcon(imageBuff).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
-        } catch (IOException e) 
+        } 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }

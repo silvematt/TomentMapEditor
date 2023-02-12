@@ -5,9 +5,7 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 
 import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
 
 import tomentme.GUI.Toolbar.SelectionPanel;

@@ -6,22 +6,16 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import tomentme.TomentEditor;
+import tomentme.Utilities;
 import tomentme.AssetsManager.AssetManager;
-import tomentme.AssetsManager.AssetManager.SpritesAssets;
-import tomentme.AssetsManager.AssetManager.TextureIDs;
+import tomentme.AssetsManager.AssetManager.*;
 import tomentme.GUI.Elements.TileButton;
 import tomentme.GUI.Elements.SelectionPanel.SelectionWallFaceButton;
-import tomentme.Map.TMap;
-import tomentme.Map.WallObject;
+import tomentme.Map.*;
 import tomentme.TomentEditor.EditMode;
 
-import java.io.*;
 import java.util.ArrayList;
-import java.awt.image.*;
-import javax.imageio.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.awt.event.ActionListener;
 import java.awt.event.*;
 
 public class SelectionPanel 
@@ -126,36 +120,15 @@ public class SelectionPanel
         if(tile == null)
             return;
 
-        TMap curMap = TomentEditor.instance.currentMap;
-
         switch (mode)
         {
-
             case FLOOR_CEILING:
 
                 break;
 
             case AI:
             case SPRITE:
-                int spriteObj = 0;
-                switch(TomentEditor.instance.GetCurrentFloor())
-                {
-                    case 0:
-                        spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 1:
-                        spriteObj = curMap.spritesMapLevel1[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 2:
-                        spriteObj = curMap.spritesMapLevel2[tile.GetY()][tile.GetX()];
-                        break;
-
-                    default:
-                    spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
-                        break;
-                }
+                int spriteObj = Utilities.GetSpriteFromMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX());
 
                 imgLabel.setIcon(AssetManager.instance.sprites[spriteObj]);
 
@@ -172,25 +145,7 @@ public class SelectionPanel
 
             case WALL:
                 
-                WallObject wallObj = null;
-                switch(TomentEditor.instance.GetCurrentFloor())
-                {
-                    case 0:
-                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 1:
-                        wallObj = curMap.level1[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 2:
-                        wallObj = curMap.level2[tile.GetY()][tile.GetX()];
-                        break;
-
-                    default:
-                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                        break;
-                }
+                WallObject wallObj = Utilities.GetWallFromMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX());
 
                 imgLabel.setIcon(AssetManager.instance.textures[wallObj.textureArray[selectedTextureArray]]);
 
@@ -248,25 +203,7 @@ public class SelectionPanel
 
         if(tile != null)
         {
-            WallObject wallObj = null;
-            switch(TomentEditor.instance.GetCurrentFloor())
-            {
-                case 0:
-                    wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                    break;
-
-                case 1:
-                    wallObj = curMap.level1[tile.GetY()][tile.GetX()];
-                    break;
-
-                case 2:
-                    wallObj = curMap.level2[tile.GetY()][tile.GetX()];
-                    break;
-
-                default:
-                    wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                    break;
-            }
+            WallObject wallObj = Utilities.GetWallFromMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX());
 
             wallObj.textureArray[selectedTextureArray] = selection;
 
@@ -283,30 +220,11 @@ public class SelectionPanel
 
         System.out.println(selection);
 
-        TMap curMap = TomentEditor.instance.currentMap;
-        
         TileButton tile = TomentEditor.instance.GetCurrentTileButton();
 
         if(tile != null)
         {
-            switch(TomentEditor.instance.GetCurrentFloor())
-            {
-                case 0:
-                    curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = selection;
-                    break;
-
-                case 1:
-                    curMap.spritesMapLevel1[tile.GetY()][tile.GetX()] = selection;
-                    break;
-
-                case 2:
-                    curMap.spritesMapLevel2[tile.GetY()][tile.GetX()] = selection;
-                    break;
-
-                default:
-                    curMap.spritesMapLevel0[tile.GetY()][tile.GetX()] = selection;
-                    break;
-            }
+            Utilities.SetInSpritesMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX(), selection);
 
             UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
             TomentEditor.instance.GetViewport().UpdateViewport();

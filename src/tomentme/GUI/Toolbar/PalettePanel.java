@@ -3,15 +3,12 @@ package tomentme.GUI.Toolbar;
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 import tomentme.TomentEditor;
 import tomentme.AssetsManager.AssetManager;
-import tomentme.AssetsManager.AssetManager.SpritesAssets;
-import tomentme.AssetsManager.AssetManager.WallAssets;
-import tomentme.GUI.Elements.Palette.ChangeEditModeButton;
-import tomentme.GUI.Elements.Palette.ItemInPalette;
+import tomentme.AssetsManager.AssetManager.*;
+import tomentme.GUI.Elements.Palette.*;
 import tomentme.GUI.Elements.Palette.ItemInPalette.ItemType;
 import tomentme.TomentEditor.EditMode;
 

@@ -1,8 +1,6 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
-import java.util.concurrent.ConcurrentSkipListSet;
-
 import javax.swing.*;
 
 import tomentme.TomentEditor;

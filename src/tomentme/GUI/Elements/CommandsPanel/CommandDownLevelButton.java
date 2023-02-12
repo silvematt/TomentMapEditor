@@ -6,6 +6,7 @@ import tomentme.TomentEditor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+
 public class CommandDownLevelButton extends JButton
 {
     public CommandDownLevelButton()

@@ -1,15 +1,13 @@
 package tomentme.GUI.Toolbar;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 import javax.swing.*;
 
 import tomentme.TomentEditor;
-import tomentme.AssetsManager.AssetManager.SpritesAssets;
-import tomentme.AssetsManager.AssetManager.WallAssets;
+import tomentme.Utilities;
+import tomentme.AssetsManager.AssetManager.*;
 import tomentme.GUI.Elements.TileButton;
 import tomentme.Map.TMap;
 import tomentme.Map.WallObject;
@@ -113,25 +111,7 @@ public class ViewerPanel
                 for(JComponent cmp : wallElements)
                     viewerContentPanel.remove(cmp);
 
-                int spriteObj = 0;
-                switch(TomentEditor.instance.GetCurrentFloor())
-                {
-                    case 0:
-                        spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 1:
-                        spriteObj = curMap.spritesMapLevel1[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 2:
-                        spriteObj = curMap.spritesMapLevel2[tile.GetY()][tile.GetX()];
-                        break;
-
-                    default:
-                        spriteObj = curMap.spritesMapLevel0[tile.GetY()][tile.GetX()];
-                        break;
-                }
+                int spriteObj = Utilities.GetSpriteFromMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX());
 
                 spritesLabel.setText("Sprite ID: " + spriteObj);
                 spriteName.setText("Name: " + SpritesAssets.GetEnumName(spriteObj));
@@ -144,25 +124,7 @@ public class ViewerPanel
                 for(JComponent cmp : spritesElements)
                     viewerContentPanel.remove(cmp);
 
-                WallObject wallObj = null;
-                switch(TomentEditor.instance.GetCurrentFloor())
-                {
-                    case 0:
-                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 1:
-                        wallObj = curMap.level1[tile.GetY()][tile.GetX()];
-                        break;
-
-                    case 2:
-                        wallObj = curMap.level2[tile.GetY()][tile.GetX()];
-                        break;
-
-                    default:
-                        wallObj = curMap.level0[tile.GetY()][tile.GetX()];
-                        break;
-                }
+                WallObject wallObj = Utilities.GetWallFromMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX());
 
                 wallTypeLabel.setText("Wall Type: " + WallAssets.GetEnumName(wallObj.assetID));
                 wallDataLabel.setText("Wall Data: " + wallObj.data);
