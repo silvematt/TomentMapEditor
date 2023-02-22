@@ -11,13 +11,13 @@ public class TMap
     public static final int MAP_WIDTH = 24; 
     public static final int MAP_HEIGHT = 24;
 
-    private String ID;
-    private String displayName;
+    public String ID;
+    public String displayName;
     
     public int playerStartingLevel;
     public int playerStartingGridX;
     public int playerStartingGridY;
-    private float playerStartingRot;
+    public float playerStartingRot;
 
     public WallObject[][] level0 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
     public WallObject[][] level1 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
@@ -30,12 +30,12 @@ public class TMap
     public int spritesMapLevel1[][] = new int[MAP_HEIGHT][MAP_WIDTH];
     public int spritesMapLevel2[][] = new int[MAP_HEIGHT][MAP_WIDTH];
 
-    private float wallLight;
-    private float floorLight;
-    private int skyID;
+    public float wallLight;
+    public float floorLight;
+    public int skyID;
 
-    private boolean hasAbsCeiling;
-    private int absCeilingLevel;
+    public boolean hasAbsCeiling;
+    public int absCeilingLevel;
 
     public TMap()
     {

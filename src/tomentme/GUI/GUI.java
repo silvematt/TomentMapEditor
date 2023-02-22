@@ -49,19 +49,43 @@ public class GUI
         JMenu mSettings = new JMenu("Settings");
         JMenu mRun = new JMenu("Run");
 
-        JMenuItem miNew, miOpen, miExit;
+        JMenuItem miNew, miOpen, miSave, miSaveAs, miExit;
         Action miExitAction = new MenuBarActions.ExitAction();
 
         miNew = new JMenuItem("New Map");
         miOpen = new JMenuItem("Open Map");
-
+        miSave = new JMenuItem("Save");
+        miSaveAs = new JMenuItem("Save as");
         miExit = new JMenuItem(miExitAction);
         miExit.setText("Exit");
 
         mFile.add(miNew, 0);
         mFile.add(miOpen, 1);
         mFile.add(new JSeparator(), 2);
-        mFile.add(miExit, 3);
+        mFile.add(miSave, 3);
+        mFile.add(miSaveAs, 4);
+        mFile.add(new JSeparator(), 5);
+        mFile.add(miExit, 6);
+
+        JMenuItem miEditorSettings, miMapSettings, miTileSetting;
+        Action miSettingsAction = new MenuBarActions.OpenSettingsAction();
+
+        miEditorSettings = new JMenuItem("Editor Settings");
+        miMapSettings = new JMenuItem(miSettingsAction);;
+        miMapSettings.setText("Map Settings");
+
+        miTileSetting = new JMenuItem("Tile Settings");
+
+        mSettings.add(miEditorSettings, 0);
+        mSettings.add(new JSeparator(), 1);
+        mSettings.add(miMapSettings, 2);
+        mSettings.add(new JSeparator(), 3);
+        mSettings.add(miTileSetting, 4);
+
+
+        JMenuItem miRun;
+        miRun = new JMenuItem("Run in game");
+        mRun.add(miRun, 0);
 
         menuBar.add(mFile);
         menuBar.add(mSettings);

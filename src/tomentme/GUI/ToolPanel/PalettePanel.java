@@ -1,4 +1,4 @@
-package tomentme.GUI.Toolbar;
+package tomentme.GUI.ToolPanel;
 
 import java.awt.*;
 import java.util.List;

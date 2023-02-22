@@ -11,7 +11,7 @@ import javax.swing.*;
 import tomentme.AssetsManager.AssetManager;
 import tomentme.GUI.Elements.*;
 import tomentme.GUI.Elements.Palette.ItemInPalette;
-import tomentme.GUI.Toolbar.*;
+import tomentme.GUI.ToolPanel.*;
 import tomentme.Map.*;
 import tomentme.Map.WallObject;
 
@@ -114,8 +114,6 @@ public class TomentEditor extends JPanel
 
     public void DrawSelectedPaletteTile(TileButton tile)
     {
-        TMap curMap = TomentEditor.instance.currentMap;
-        
         SaveMapState();
 
         System.out.println("doing");

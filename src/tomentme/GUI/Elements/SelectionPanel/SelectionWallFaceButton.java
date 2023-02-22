@@ -4,11 +4,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
+import tomentme.GUI.ToolPanel.SelectionPanel;
+
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.awt.event.*;
-
-import tomentme.GUI.Toolbar.SelectionPanel;
 
 public class SelectionWallFaceButton extends JButton
 {
