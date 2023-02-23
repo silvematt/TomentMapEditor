@@ -23,8 +23,8 @@ public class TMap
     public WallObject[][] level1 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
     public WallObject[][] level2 = new WallObject[MAP_HEIGHT][MAP_WIDTH];
 
-    private int floorMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
-    private int ceilingMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+    public int floorMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+    public int ceilingMap[][] = new int[MAP_HEIGHT][MAP_WIDTH];
 
     public int spritesMapLevel0[][] = new int[MAP_HEIGHT][MAP_WIDTH];
     public int spritesMapLevel1[][] = new int[MAP_HEIGHT][MAP_WIDTH];
@@ -53,8 +53,8 @@ public class TMap
                 this.floorMap[y][x] = 3;
                 this.ceilingMap[y][x] = 4;
 
-                this.ID = "";
-                this.displayName = "";
+                this.ID = "newmap";
+                this.displayName = "newmap";
                 this.playerStartingLevel = 0;
                 this.playerStartingGridX = 12;
                 this.playerStartingGridY = 12;
@@ -186,7 +186,7 @@ public class TMap
 
             fileScanner.close();
         } 
-        catch (FileNotFoundException e) 
+        catch (Exception e) 
         {
             System.out.println("An error occurred. File may not exist or is corrupted.");
             e.printStackTrace();
