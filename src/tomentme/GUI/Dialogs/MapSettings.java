@@ -40,8 +40,6 @@ public class MapSettings extends JDialog
         this.setLocationRelativeTo(frame);
         this.setSize(300, 400);
         this.setVisible(true);
-
-        
     }
 
     public void Initialize()

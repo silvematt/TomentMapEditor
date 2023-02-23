@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import tomentme.AssetsManager.AssetManager;
+import tomentme.GUI.GUI;
 import tomentme.GUI.Elements.*;
 import tomentme.GUI.Elements.Palette.ItemInPalette;
 import tomentme.GUI.ToolPanel.*;
@@ -45,6 +46,8 @@ public class TomentEditor extends JPanel
     private int stateIndx = -1;
     private List<TMapMemento> states = new ArrayList<>();
 
+    boolean initialized = false;
+
     public TileButton GetCurrentTileButton()
     {
         return curSelectedButton;
@@ -58,7 +61,7 @@ public class TomentEditor extends JPanel
         AI
     }
 
-    private EditMode curEditMode = null;
+    private EditMode curEditMode = EditMode.WALL;
 
     public TomentEditor()
     {
@@ -66,6 +69,8 @@ public class TomentEditor extends JPanel
 
         if(instance == null)
             instance = this;
+
+        curEditMode = EditMode.WALL;
 
         InitializeTomentMapEditor();
     }
@@ -79,7 +84,10 @@ public class TomentEditor extends JPanel
         AssetManager assetManager = new AssetManager();
         AssetManager.instance = assetManager;
         assetManager.InitializeAssetManager();
-        
+
+        curEditMode = (EditMode.WALL);
+        NewMap();
+
         commands = new CommandsPanel(toolSections);
         palette = new PalettePanel(toolSections);
         viewer = new ViewerPanel(toolSections);
@@ -88,14 +96,10 @@ public class TomentEditor extends JPanel
         this.add(toolSections, BorderLayout.EAST);
         viewport = new Viewport(this);
         
-        // Testing level load
-        currentMap = new TMap();
-        currentMap.LoadMap("lvl1");
-        
-        SetMode(EditMode.WALL);
-        
-        SelectTile(viewport.tiles[0][0]);
+        SelectTile(viewport.tiles[12][12]);
         viewport.UpdateViewport();
+        UpdateAll();
+        initialized = true;
     }
 
     public void SelectTile(TileButton tile)
@@ -299,5 +303,26 @@ public class TomentEditor extends JPanel
         }
 
         UpdateAll();
+    }
+
+    public void NewMap()
+    {
+        currentMap = new TMap();
+        GUI.GetFrame().setTitle("Toment MapEditor - " + "New Map");
+
+        if(initialized)
+            UpdateAll();
+    }
+
+    public void OpenMap(String str)
+    {
+        currentMap.LoadMap(str);
+        GUI.GetFrame().setTitle("Toment MapEditor - " + currentMap.ID);
+        UpdateAll();
+    }
+
+    public void SaveMap()
+    {
+
     }
 }

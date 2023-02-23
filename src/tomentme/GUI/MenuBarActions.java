@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import tomentme.TomentEditor;
 import tomentme.GUI.Dialogs.MapSettings;
+import tomentme.GUI.Dialogs.OpenMapDialog;
 
 public class MenuBarActions 
 {
@@ -24,6 +25,24 @@ public class MenuBarActions
         public void actionPerformed(ActionEvent e)
         {
             MapSettings settings = new MapSettings(GUI.GetFrame(), "Settings", true);
+        }
+    }
+
+    public static class NewMapAction extends AbstractAction
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            TomentEditor.instance.NewMap();
+        }
+    }
+
+    public static class OpenMapAction extends AbstractAction
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            OpenMapDialog settings = new OpenMapDialog(GUI.GetFrame(), "Open Map", true);
         }
     }
 }

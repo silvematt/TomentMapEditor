@@ -45,6 +45,27 @@ public class TMap
                 this.level0[y][x] = new WallObject();
                 this.level1[y][x] = new WallObject();
                 this.level2[y][x] = new WallObject();
+
+                this.spritesMapLevel0[y][x] = 0;
+                this.spritesMapLevel1[y][x] = 0;
+                this.spritesMapLevel2[y][x] = 0;
+
+                this.floorMap[y][x] = 3;
+                this.ceilingMap[y][x] = 4;
+
+                this.ID = "";
+                this.displayName = "";
+                this.playerStartingLevel = 0;
+                this.playerStartingGridX = 12;
+                this.playerStartingGridY = 12;
+                this.playerStartingRot = 0.0f;
+
+                this.skyID = 1;
+                this.wallLight = 100.0f;
+                this.floorLight = 80.0f;
+
+                this.hasAbsCeiling = false;
+                this.absCeilingLevel = 0;
             }
     }
 
