@@ -19,11 +19,5 @@ public class Main
                 GUI.CreateAndShowGUI();
             }
         });
-
-        // Main thread loop
-        while(true)
-        {
-
-        }
     }
 }
