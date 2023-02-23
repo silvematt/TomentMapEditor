@@ -3,6 +3,9 @@ package tomentme;
 import javax.swing.JPanel;
 
 import java.awt.*;
+import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -323,6 +326,322 @@ public class TomentEditor extends JPanel
 
     public void SaveMap()
     {
+        
+        try
+        {
+            System.out.println(Main.path+"/Data/maps/"+currentMap.ID+".tmap");
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Main.path+"/Data/maps/"+currentMap.ID+".tmap"), "utf-8"));
 
+            WriteMapToFile(writer);
+
+            writer.close();
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+
+    private void WriteMapToFile(Writer writer)
+    {
+        TMap m = currentMap;
+        
+        try
+        {
+            writer.write("id="+m.ID+";\n");
+            writer.write("name="+m.displayName+";\n");
+            writer.write("startingLevel="+m.playerStartingLevel+";\n");
+            writer.write("startingGridX="+m.playerStartingGridX+";\n");
+            writer.write("startingGridY="+m.playerStartingGridY+";\n");
+            writer.write("startingRot="+m.playerStartingRot+";\n");
+
+            // Write level maps
+            int row = 0;
+            int col = 0;
+
+            // Write level0 map
+            writer.write("level0=\n");
+            writer.write("[\n");
+
+            boolean level0Done = false;
+            row = 0;
+            col = 0;
+            while(!level0Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write("(" + m.level0[col][row].assetID + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_TOP] + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_BOTTOM] + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_LEFT] + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_RIGHT] + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_UP] + "," + m.level0[col][row].textureArray[WallObject.TEXTURE_ARRAY_DOWN] + "," + "\"" + m.level0[col][row].data + "\"),");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    level0Done = true;
+                    break;
+                }
+            }
+
+            // Write level1 map
+            writer.write("level1=\n");
+            writer.write("[\n");
+
+            boolean level1Done = false;
+            row = 0;
+            col = 0;
+            while(!level1Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write("(" + m.level1[col][row].assetID + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_TOP] + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_BOTTOM] + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_LEFT] + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_RIGHT] + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_UP] + "," + m.level1[col][row].textureArray[WallObject.TEXTURE_ARRAY_DOWN] + "," + "\"" + m.level1[col][row].data + "\"),");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    level1Done = true;
+                    break;
+                }
+            }
+
+            // Write level2 map
+            writer.write("level2=\n");
+            writer.write("[\n");
+
+            boolean level2Done = false;
+            row = 0;
+            col = 0;
+            while(!level2Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write("(" + m.level2[col][row].assetID + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_TOP] + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_BOTTOM] + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_LEFT] + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_RIGHT] + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_UP] + "," + m.level2[col][row].textureArray[WallObject.TEXTURE_ARRAY_DOWN] + "," + "\"" + m.level2[col][row].data + "\"),");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    level2Done = true;
+                    break;
+                }
+            }
+
+            // Write floor map
+            writer.write("floorsMap=\n");
+            writer.write("[\n");
+
+            boolean floormapDone = false;
+            row = 0;
+            col = 0;
+            while(!floormapDone)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write(m.floorMap[col][row] + ",");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    floormapDone = true;
+                    break;
+                }
+            }
+
+            // Write ceiling map
+            writer.write("ceilingMap=\n");
+            writer.write("[\n");
+
+            boolean ceilingMapDone = false;
+            row = 0;
+            col = 0;
+            while(!ceilingMapDone)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write(m.ceilingMap[col][row] + ",");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    ceilingMapDone = true;
+                    break;
+                }
+            }
+
+            // Write sprites map 0
+            writer.write("spritesMapLevel0=\n");
+            writer.write("[\n");
+
+            boolean spritesMapLevel0Done = false;
+            row = 0;
+            col = 0;
+            while(!spritesMapLevel0Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write(m.spritesMapLevel0[col][row] + ",");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    spritesMapLevel0Done = true;
+                    break;
+                }
+            }
+
+            // Write sprites map 0
+            writer.write("spritesMapLevel1=\n");
+            writer.write("[\n");
+
+            boolean spritesMapLevel1Done = false;
+            row = 0;
+            col = 0;
+            while(!spritesMapLevel1Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write(m.spritesMapLevel1[col][row] + ",");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    spritesMapLevel1Done = true;
+                    break;
+                }
+            }
+
+            // Write sprites map 0
+            writer.write("spritesMapLevel2=\n");
+            writer.write("[\n");
+
+            boolean spritesMapLevel2Done = false;
+            row = 0;
+            col = 0;
+            while(!spritesMapLevel2Done)
+            {
+                // Write row
+                writer.write("{");
+                while(row < 24)
+                {
+                    writer.write(m.spritesMapLevel2[col][row] + ",");
+                    row++;
+                }
+
+                writer.write("}");
+
+                col++;
+
+                if(col < 24)
+                {
+                    writer.write(",\n");
+                    row = 0;
+                }
+                else
+                {
+                    writer.write("];\n");
+                    spritesMapLevel2Done = true;
+                    break;
+                }
+            }
+
+            // Write last properties
+            writer.write("wallLighting="+m.wallLight+"f;\n");
+            writer.write("floorLighting="+m.floorLight+"f;\n");
+            writer.write("skyID="+m.skyID+";\n");
+            int hasAbsCeilingVal = m.hasAbsCeiling ? 1 : 0;
+            writer.write("hasAbsCeiling="+hasAbsCeilingVal+";\n");
+            writer.write("absCeilingLevel="+m.absCeilingLevel+";\n;");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 }

@@ -45,4 +45,13 @@ public class MenuBarActions
             OpenMapDialog settings = new OpenMapDialog(GUI.GetFrame(), "Open Map", true);
         }
     }
+
+    public static class SaveMapAction extends AbstractAction
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            TomentEditor.instance.SaveMap();
+        }
+    }
 }
