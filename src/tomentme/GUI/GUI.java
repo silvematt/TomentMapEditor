@@ -31,6 +31,7 @@ public class GUI
         ChangeEditModeButton.InitializeGUIMembers();
         SelectionWallFaceButton.InitializeGUIMembers();
         
+        // Creates the editor
         TomentEditor editor = new TomentEditor();
         AddMenuBar();
         frame.add(editor);
@@ -42,6 +43,7 @@ public class GUI
     }
 
     
+    // Adds the toolbar
     private static void AddMenuBar()
     {
         JMenuBar menuBar = new JMenuBar();
@@ -49,13 +51,17 @@ public class GUI
         JMenu mSettings = new JMenu("Settings");
         JMenu mRun = new JMenu("Run");
 
+        // Items
         JMenuItem miNew, miOpen, miSave, miSaveAs, miExit;
+
+        // Menu Actions
         Action miNewMapAction = new MenuBarActions.NewMapAction();
         Action miExitAction = new MenuBarActions.ExitAction();
         Action miOpenAction = new MenuBarActions.OpenMapAction();
         Action miSaveAction = new MenuBarActions.SaveMapAction();
         Action miSaveAsAction = new MenuBarActions.SaveAsAction();
 
+        // Define actions
         miNew = new JMenuItem(miNewMapAction);
         miNew.setText("New Map");
         miOpen = new JMenuItem(miOpenAction);
@@ -67,6 +73,7 @@ public class GUI
         miExit = new JMenuItem(miExitAction);
         miExit.setText("Exit");
 
+        // Add them to the JMenus
         mFile.add(miNew, 0);
         mFile.add(miOpen, 1);
         mFile.add(new JSeparator(), 2);
@@ -102,6 +109,7 @@ public class GUI
         frame.setJMenuBar(menuBar);
     }
 
+    // Gets the frame
     public static JFrame GetFrame()
     {
         return frame;

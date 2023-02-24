@@ -20,13 +20,16 @@ import tomentme.Map.*;
 import tomentme.Map.WallObject;
 
 
-
+/*
+ * Editor class, holds all the panels and main functionalities
+ */
 public class TomentEditor extends JPanel
 {
     // Defines
     public static final int DEF_WINDOW_W = 800;
     public static final int DEF_WINDOW_H = 600;
     
+    // Singleton instance
     public static TomentEditor instance;
 
     // Tools
@@ -51,11 +54,13 @@ public class TomentEditor extends JPanel
 
     boolean initialized = false;
 
+    // Returns the selected tile
     public TileButton GetCurrentTileButton()
     {
         return curSelectedButton;
     }
 
+    // Edit modes
     public enum EditMode
     {
         WALL,
@@ -66,6 +71,7 @@ public class TomentEditor extends JPanel
 
     private EditMode curEditMode = EditMode.WALL;
 
+    // Constructor
     public TomentEditor()
     {
         setLayout(new BorderLayout());
@@ -80,10 +86,12 @@ public class TomentEditor extends JPanel
 
     private void InitializeTomentMapEditor()
     {
+        // Creates the tools section panel
         toolSections = new JPanel();
         toolSections.setLayout(new BoxLayout(toolSections, BoxLayout.Y_AXIS));
         toolSections.setBackground(Color.GRAY);
 
+        // Creates and initializes the asset manager
         AssetManager assetManager = new AssetManager();
         AssetManager.instance = assetManager;
         assetManager.InitializeAssetManager();
@@ -91,6 +99,7 @@ public class TomentEditor extends JPanel
         curEditMode = (EditMode.WALL);
         NewMap();
 
+        // Creates the various panels
         commands = new CommandsPanel(toolSections);
         palette = new PalettePanel(toolSections);
         viewer = new ViewerPanel(toolSections);
@@ -99,12 +108,14 @@ public class TomentEditor extends JPanel
         this.add(toolSections, BorderLayout.EAST);
         viewport = new Viewport(this);
         
+        // Selects the center tile
         SelectTile(viewport.tiles[12][12]);
         viewport.UpdateViewport();
         UpdateAll();
         initialized = true;
     }
 
+    // Called when a tile is clicked
     public void SelectTile(TileButton tile)
     {
         if(curSelectedButton != null)
@@ -119,13 +130,16 @@ public class TomentEditor extends JPanel
         curSelectedButton = tile;
     }
 
+    // Draws either the copyed element or the selected element from the palette
     public void DrawSelectedPaletteTile(TileButton tile)
     {
+        // Save the state before applying changes to allow undo
         SaveMapState();
 
-        System.out.println("doing");
+        // If copying
         if(commands.IsCopying())
         {
+            // Copy selected element
             switch(curEditMode)
             {
                 case FLOOR_CEILING:
@@ -143,8 +157,9 @@ public class TomentEditor extends JPanel
                     break;
             }
         }
-        else // adding from palette
+        else // Adding from palette
         {
+            // Draw the new item
             ItemInPalette itemToDraw = palette.selectedItem;
 
             if(itemToDraw == null)
@@ -176,6 +191,7 @@ public class TomentEditor extends JPanel
     }
 
 
+    // Copies the selected tile and stores it
     public void CopySelectedTile()
     {
         switch(curEditMode)
@@ -243,6 +259,7 @@ public class TomentEditor extends JPanel
         return currentFloor;
     }
 
+    // Sets the current displayed floor
     public int SetCurrentFloor(int _floor)
     {
         if(_floor < 0)
@@ -255,6 +272,7 @@ public class TomentEditor extends JPanel
         return (currentFloor = _floor);
     }
 
+    // Sets the current edit mode
     public void SetMode(EditMode mode)
     {
         if(curEditMode != null && curEditMode == mode)
@@ -269,6 +287,7 @@ public class TomentEditor extends JPanel
         UpdateAll();
     }
 
+    // Updates all the panels
     public void UpdateAll()
     {
         // Update all
@@ -291,12 +310,14 @@ public class TomentEditor extends JPanel
         return curSelectedButton;
     }
 
+    // Saves the state of the map
     public void SaveMapState()
     {
         stateIndx++;
         states.add(stateIndx, new TMapMemento(currentMap));
     }
 
+    // Undo
     public void RestoreToPrevious()
     {
         if(stateIndx >= 0)
@@ -308,6 +329,7 @@ public class TomentEditor extends JPanel
         UpdateAll();
     }
 
+    // Creates new map
     public void NewMap()
     {
         currentMap = new TMap();
@@ -317,6 +339,7 @@ public class TomentEditor extends JPanel
             UpdateAll();
     }
 
+    // Opens the map
     public void OpenMap(String str)
     {
         currentMap.LoadMap(str);
@@ -324,9 +347,9 @@ public class TomentEditor extends JPanel
         UpdateAll();
     }
 
+    // Attempts to save the map with id
     public void SaveMap()
     {
-        
         try
         {
             System.out.println(Main.path+"/Data/maps/"+currentMap.ID+".tmap");
@@ -342,6 +365,7 @@ public class TomentEditor extends JPanel
         }
     }
 
+    // Writes the map to the file
     private void WriteMapToFile(Writer writer)
     {
         TMap m = currentMap;

@@ -11,16 +11,21 @@ import tomentme.GUI.Elements.*;
 
 import tomentme.Map.*;
 
+/*
+ * Represent the Viewport located in the ToolsPanel
+ */
 public class Viewport 
 {
-
+    // Tiles
     public TileButton[][] tiles = new TileButton[TMap.MAP_HEIGHT][TMap.MAP_WIDTH];
 
+    // Constructor
     public Viewport(JPanel content)
     {
         JPanel viewport = new JPanel(new GridLayout(24, 24));
         viewport.setBackground(Color.GRAY);
 
+        // Create and set all tiles
         for(int i = 0; i < TMap.MAP_HEIGHT; i++)
             for(int j = 0; j < TMap.MAP_WIDTH; j++)
             {
@@ -35,6 +40,7 @@ public class Viewport
         content.add(viewport);
     }
 
+    // Updates the panel, drawing all that changed
     public void UpdateViewport()
     {
         TMap currentMap = TomentEditor.instance.currentMap;
@@ -43,6 +49,7 @@ public class Viewport
 
         int currentFloor = TomentEditor.instance.GetCurrentFloor();
 
+        // Select the correct floor to draw
         switch(currentFloor)
         {
             case 0: 
@@ -66,6 +73,7 @@ public class Viewport
                 break;
         }
 
+        // Get through all the tilemap and draw the appropriate tile image
         for(int y = 0; y < TMap.MAP_HEIGHT; y++)
             for(int x = 0; x < TMap.MAP_WIDTH; x++)
             {

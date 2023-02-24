@@ -9,16 +9,22 @@ import java.awt.Image;
 import java.awt.image.*;
 import javax.imageio.*;
 
+/*
+ * Class to manage assets as textures, it is an implementation of the Flyweight pattern, loads things once and use them throughout the program.
+ */
 public class AssetManager 
 {
+    // Default array size
     public static final int OBJECTARRAY_DEFAULT_SIZE = 256;
 
+    // Singleton
     public static AssetManager instance;
     public static AssetManager GetAssetManager()
     {
         return instance;
     }
 
+    // Texture IDs the same as TomentRaycaster
     public enum TextureIDs
     {
         EMPTY,
@@ -35,6 +41,7 @@ public class AssetManager
         FloorDirt1
     };
 
+    // Texture IDs for MapEditor stuff
     public enum MapEDTextureIDs
     {
         EMPTY,
@@ -52,6 +59,7 @@ public class AssetManager
         ThinVer
     };
 
+    // Walls IDs the same as TomentRaycaster
     public enum WallAssets
     {
         EMPTY,
@@ -65,6 +73,7 @@ public class AssetManager
         W_WallLadderDown,
         W_WallInvisible;
 
+        // Converts the number in a name
         public static String GetEnumName(int id)
         {
             switch(id)
@@ -105,6 +114,7 @@ public class AssetManager
         }
     };
 
+    // Sprites ID the same as TomentRaycaster
     public enum SpritesAssets
     {
         // 0 = Empty
@@ -129,6 +139,7 @@ public class AssetManager
         S_PickupGreatsword,
         DS_SkeletonLord;
 
+        // Converts the number in a name
         public static String GetEnumName(int id)
         {
             switch(id)
@@ -208,8 +219,10 @@ public class AssetManager
     public ImageIcon[] sprites = new ImageIcon[OBJECTARRAY_DEFAULT_SIZE];
 
 
+    // Initializes the asset manager
     public void InitializeAssetManager()
     {
+        // Loads all the elements one at time
         LoadMapEditorViewport();
         LoadMapEditorPalette();
 
@@ -217,6 +230,7 @@ public class AssetManager
         LoadSprites();
     }
 
+    // Load viewport related stuff
     private void LoadMapEditorViewport()
     {
         BufferedImage imageBuff;
@@ -275,6 +289,7 @@ public class AssetManager
         }
     }
 
+    // Load palette related stuff
     private void LoadMapEditorPalette()
     {
         BufferedImage imageBuff;
@@ -318,6 +333,7 @@ public class AssetManager
         }
     }
 
+    // Load all textures
     private void LoadTexures()
     {
         BufferedImage imageBuff;
@@ -363,6 +379,7 @@ public class AssetManager
         }
     }
 
+    // Load all sprites
     private void LoadSprites()
     {
         BufferedImage imageBuff;

@@ -1,9 +1,13 @@
 package tomentme.Map;
 
+/*
+ * Implementation of the Memento pattern to save the state of a map and allow undo
+ */
 public class TMapMemento
 {
     private TMap state;
 
+    // Constructor catches the state
     public TMapMemento(TMap toSave)
     {
         state = new TMap();

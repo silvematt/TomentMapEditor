@@ -7,8 +7,13 @@ import tomentme.TomentEditor;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
+
+/*
+ * Commands button that allows to go down a level
+ */
 public class CommandDownLevelButton extends JButton
 {
+    // Constructor
     public CommandDownLevelButton()
     {
         this.setText("▼");

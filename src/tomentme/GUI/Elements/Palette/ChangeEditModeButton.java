@@ -11,6 +11,9 @@ import java.awt.event.*;
 import tomentme.TomentEditor;
 import tomentme.TomentEditor.EditMode;
 
+/*
+ * Palette button that allows to change the edit mode
+ */
 public class ChangeEditModeButton extends JButton
 {
     private EditMode modeToSelect;
@@ -19,12 +22,14 @@ public class ChangeEditModeButton extends JButton
     public static Border notSelectedBorder;
     public static Border selectedBorder;
     
+    // Initializes the static members
     public static void InitializeGUIMembers()
     {
         notSelectedBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);
         selectedBorder = BorderFactory.createLineBorder(Color.RED, 3, false);
     }
 
+    // Constructor, create button and listener
     public ChangeEditModeButton(String text, EditMode mode)
     {
         this.setText(text);

@@ -9,6 +9,9 @@ import tomentme.GUI.Dialogs.MapSettings;
 import tomentme.GUI.Dialogs.OpenMapDialog;
 import tomentme.GUI.Dialogs.SaveMapAsDialog;
 
+/*
+ * Defines the actions that are performed from the toolbar menus
+ */
 public class MenuBarActions 
 {
     public static class ExitAction extends AbstractAction

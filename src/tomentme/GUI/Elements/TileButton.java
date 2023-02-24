@@ -9,7 +9,9 @@ import java.awt.event.*;
 import tomentme.*;        
 import java.awt.*;
 
-
+/*
+ * Represent selectable tile in the viewport.
+ */
 public class TileButton extends JButton
 {
     // Tile Button Borders
@@ -17,6 +19,7 @@ public class TileButton extends JButton
     public static Border selectedBorder;
     public static Border hoverBorder;
     
+    // Initializes the static members
     public static void InitializeGUIMembers()
     {
         notSelectedBorder = BorderFactory.createLineBorder(Color.DARK_GRAY, 1, false);
@@ -24,10 +27,11 @@ public class TileButton extends JButton
         hoverBorder = BorderFactory.createLineBorder(Color.WHITE, 1, false);
     }
 
-    
+    // Properties
     private int x,y;
     private boolean isSelected;
 
+    // Constructor
     public TileButton(int _x, int _y)
     {
         this.x = _x;
@@ -47,6 +51,8 @@ public class TileButton extends JButton
 
     // Tile Button MoseAdapter for Border
     private static java.awt.event.MouseAdapter ml;
+
+    // Allows to define actions for each mouse event (enter, click, exit)
     private static java.awt.event.MouseAdapter GetMl()
     {
         if(ml == null)
@@ -88,6 +94,7 @@ public class TileButton extends JButton
         return ml;
     }
 
+    // Getters
     public int GetX()
     {
         return x;
@@ -108,6 +115,7 @@ public class TileButton extends JButton
         isSelected = selected;
     }
 
+    // Unselect tile
     public void Unselect()
     {
         setSelected(false);

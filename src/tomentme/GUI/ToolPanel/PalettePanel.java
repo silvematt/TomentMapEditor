@@ -12,21 +12,26 @@ import tomentme.GUI.Elements.Palette.*;
 import tomentme.GUI.Elements.Palette.ItemInPalette.ItemType;
 import tomentme.TomentEditor.EditMode;
 
+/*
+ * Represent the Palette Panel located in the ToolsPanel
+ */
 public class PalettePanel 
 {
     public ItemInPalette selectedItem;
-
     private JPanel scrollContentPanel;
 
+    // Content elements
     private List<JComponent> wallsElements = new ArrayList<JComponent>();
     private List<JComponent> spritesElements = new ArrayList<JComponent>();
     private List<JComponent> aiElements = new ArrayList<JComponent>();
 
+    // Edit mode butons
     private ChangeEditModeButton editWall;
     private ChangeEditModeButton editSprites;
     private ChangeEditModeButton editAI;
     private ChangeEditModeButton editFloorCeiling;
 
+    //
     public PalettePanel(JPanel toolSections)
     {
         JPanel palettePanel = new JPanel();
@@ -42,6 +47,7 @@ public class PalettePanel
 
         JPanel paletteButtons = new JPanel();
         
+        // Add change mode buttons
         editWall = new ChangeEditModeButton("WALL", EditMode.WALL);
         editWall.setPreferredSize(new Dimension(60, 20));
         paletteButtons.add(editWall);
@@ -84,14 +90,17 @@ public class PalettePanel
         HideAll();
     }
 
+    // Updates the panel, drawing all that changed
     public void Update(EditMode mode)
     {
+        // Remove highlights
         HideAll();
         editWall.setBorder(ChangeEditModeButton.notSelectedBorder);
         editSprites.setBorder(ChangeEditModeButton.notSelectedBorder);
         editAI.setBorder(ChangeEditModeButton.notSelectedBorder);
         editFloorCeiling.setBorder(ChangeEditModeButton.notSelectedBorder);
 
+        // Show only what needs to be shown in the current edit mode
         switch(mode)
         {
             case AI:
@@ -126,6 +135,7 @@ public class PalettePanel
         scrollContentPanel.repaint();
     }
 
+    // Select an item inside the palette
     public void SelectItemInPalette(ItemInPalette newItem)
     {
         if(selectedItem != null)
@@ -134,10 +144,12 @@ public class PalettePanel
         selectedItem = newItem;
         selectedItem.Select();
 
+        // Update commands
         TomentEditor.instance.GetCommandsPanel().SetCurSelectedItem(selectedItem.GetName());
         TomentEditor.instance.GetCommandsPanel().SetIsCopying(false);
     }
 
+    // Unselect the selected palette item
     public void UnselectItemInPalette()
     {
         if(selectedItem != null)
@@ -148,6 +160,7 @@ public class PalettePanel
         selectedItem = null;
     }
 
+    // Removes all the elements from the palette scroll view
     private void HideAll()
     {
         for(JComponent c : wallsElements)
@@ -160,6 +173,7 @@ public class PalettePanel
             scrollContentPanel.remove(c);
     }
 
+    // Add all the walls elements
     private void FillContentPane_Walls(JPanel scrollContentPanel)
     {
         ItemInPalette nothing = new ItemInPalette(AssetManager.instance.mapEditorPalette[WallAssets.EMPTY.ordinal()], WallAssets.EMPTY.ordinal(), "EMPTY", ItemType.WALL);
@@ -203,6 +217,7 @@ public class PalettePanel
         wallsElements.add(invisibleWall);
     }
 
+    // Add all the sprites elements
     private void FillContentPane_Sprites(JPanel scrollContentPanel)
     {
         ItemInPalette nothing = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.S_EMPTY.ordinal()], SpritesAssets.S_EMPTY.ordinal(), "EMPTY", ItemType.SPRITE);
@@ -258,6 +273,7 @@ public class PalettePanel
         spritesElements.add(altarMana);
     }
 
+    // Add all the AI elements
     private void FillContentPane_AI(JPanel scrollContentPanel)
     {
         ItemInPalette nothing = new ItemInPalette(AssetManager.instance.sprites[SpritesAssets.S_EMPTY.ordinal()], SpritesAssets.S_EMPTY.ordinal(), "EMPTY     ", ItemType.AI);

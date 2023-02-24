@@ -2,6 +2,9 @@ package tomentme;
 
 import tomentme.GUI.*;
 
+/*
+ * Program entry point
+ */
 public class Main 
 {
     public static String path;

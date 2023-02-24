@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.*;
 
+/*
+ * Represent the Selection Panel located in the ToolsPanel
+ */
 public class SelectionPanel 
 {
     private SelectionWallFaceButton curWallFace = null;
@@ -25,16 +28,18 @@ public class SelectionPanel
     
     private JLabel imgLabel;
 
-    // Wall
+    // Wall mode
     private JComboBox selectBox;
     private boolean fireSelectBox = false;
     private boolean fireSelectBoxSprite = false;
     private List<SelectionWallFaceButton> wallFaceButtons = new ArrayList<>();
 
+    // Sprites mode
     private JComboBox selectBoxSprites;
     private JPanel sbtnPnl;
     private JPanel wallFaceButtonsPanel;
 
+    // Constructor
     public SelectionPanel(JPanel toolSections)
     {
         JPanel selectedFacePanel = new JPanel();
@@ -48,10 +53,12 @@ public class SelectionPanel
         selectedFaceSelection.add(sfLabel);
         toolSections.add(selectedFaceSelection);
 
+        // Img preview
         imgLabel = new JLabel((AssetManager.instance.textures[1]));
         imgLabel.setPreferredSize(new Dimension(64,64));
         selectedFacePanel.add(imgLabel, BorderLayout.LINE_START);
 
+        // Do walls combobox
         sbtnPnl = new JPanel();
         selectBox = new JComboBox<>(TextureIDs.values());
         selectBox.setBorder(null);
@@ -66,6 +73,7 @@ public class SelectionPanel
             }
         });
 
+        // Do sprites combobox
         selectBoxSprites = new JComboBox<>(SpritesAssets.values());
         selectBoxSprites.setBorder(null);
         selectBoxSprites.setPreferredSize(new Dimension(70,25));
@@ -84,6 +92,7 @@ public class SelectionPanel
 
         selectedFacePanel.add(sbtnPnl);
 
+        // Fill the "Select Face" section
         wallFaceButtonsPanel = new JPanel();
         wallFaceButtonsPanel.setBackground(null);
         wallFaceButtonsPanel.setLayout(new GridLayout(0, 1));
@@ -115,11 +124,13 @@ public class SelectionPanel
         toolSections.add(selectedFacePanel);
     }
 
+    // Updates the panel, drawing all that changed
     public void UpdatePanel(EditMode mode, TileButton tile)
     {
         if(tile == null)
             return;
 
+        // Show only what needs to be shown in the current edit mode
         switch (mode)
         {
             case FLOOR_CEILING:
@@ -174,6 +185,7 @@ public class SelectionPanel
         }
     }
 
+    // Called when the face that needs to be shown changes
 	public void Wall_ChangeTextureArray(SelectionWallFaceButton source) 
     {
         if(curWallFace != null)
@@ -188,6 +200,7 @@ public class SelectionPanel
         UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
 	}
 
+    // Called when a texture change is requested by the user
     public void Wall_SelectTexture()
     {
         if(!fireSelectBox)
@@ -211,6 +224,7 @@ public class SelectionPanel
         }
     }
 
+    // Called when a sprite change is requested by the user
     private void Sprite_SelectSprite()
     {
         if(!fireSelectBoxSprite)
@@ -226,6 +240,7 @@ public class SelectionPanel
         {
             Utilities.SetInSpritesMap(TomentEditor.instance.GetCurrentFloor(), tile.GetY(), tile.GetX(), selection);
 
+            // Update
             UpdatePanel(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());
             TomentEditor.instance.GetViewport().UpdateViewport();
             TomentEditor.instance.GetViewerPanel().UpdateViewer(TomentEditor.instance.GetMode(), TomentEditor.instance.GetCurTileButton());

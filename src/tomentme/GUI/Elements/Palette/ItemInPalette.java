@@ -6,8 +6,12 @@ import java.awt.event.*;
 
 import tomentme.TomentEditor;
 
+/*
+ * Represent an item that sits in the palette.
+ */
 public class ItemInPalette extends JPanel 
 {
+    // The type of the item
     public enum ItemType
     {
         WALL,
@@ -17,18 +21,22 @@ public class ItemInPalette extends JPanel
         CEILING
     };
 
+    // Properties
     public ItemType iType;
     public String iName;
     public int iID;
 
+    // Constructor
     public ItemInPalette(ImageIcon icon, int id, String name, ItemType t)
     {
+        // Set properties
         iName = name;
         iID = id;
         iType = t;
 
         this.setBorder(null);
 
+        // Build the GUI layout
         JLabel objIcon = new JLabel(icon);
         this.add(objIcon);
         JPanel objContent = new JPanel();
@@ -53,11 +61,13 @@ public class ItemInPalette extends JPanel
         this.addMouseListener( ml );
     }
 
+    // Unselects the item
     public void Unselect()
     {
         this.setBackground(Color.GRAY);
     }
 
+    // Selects the item
     public void Select()
     {
         this.setBackground(Color.RED);

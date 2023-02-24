@@ -13,6 +13,9 @@ import tomentme.Map.TMap;
 import tomentme.Map.WallObject;
 import tomentme.TomentEditor.EditMode;
 
+/*
+ * Represent the ViewerPanel located in the ToolsPanel
+ */
 public class ViewerPanel 
 {
     // Common
@@ -31,8 +34,10 @@ public class ViewerPanel
     private JLabel spriteName;
     private JLabel spirteType;
 
+    // Constructor
     public ViewerPanel(JPanel toolSections)
     {
+        // Fill its GUI
         JPanel viewerPanel = new JPanel();
         viewerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         viewerPanel.setBackground(Color.GRAY);
@@ -51,6 +56,7 @@ public class ViewerPanel
         selectedTileLabel = new JLabel("Selected Tile: (0,0)");
         viewerContentPanel.add(selectedTileLabel);
 
+        // Insert elements
         FillWallElements();
         FillSpritesElements();
 
@@ -58,6 +64,7 @@ public class ViewerPanel
         toolSections.add(viewerPanel);
     }
 
+    // Create and add wall related elements
     private void FillWallElements()
     {
         wallTypeLabel = new JLabel("Wall Type: None");
@@ -73,6 +80,7 @@ public class ViewerPanel
         viewerContentPanel.add(wallLoadPreset);
     }
 
+    // Create and add sprite related elements
     private void FillSpritesElements()
     {
         spritesLabel = new JLabel("Sprite ID: None");
@@ -88,6 +96,7 @@ public class ViewerPanel
         viewerContentPanel.add(spirteType);
     }
 
+    // Updates the panel, drawing all that changed
     public void UpdateViewer(EditMode mode, TileButton tile)
     {
         if(tile == null)
@@ -97,6 +106,7 @@ public class ViewerPanel
 
         TMap curMap = TomentEditor.instance.currentMap;
 
+        // Show only what needs to be shown in the current edit mode
         switch (mode)
         {
             case FLOOR_CEILING:

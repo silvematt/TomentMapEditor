@@ -3,8 +3,12 @@ package tomentme;
 import tomentme.Map.TMap;
 import tomentme.Map.WallObject;
 
+/*
+ * Implements useful static methods
+ */
 public class Utilities 
 {
+    // Gets the sprite at (y,x) from the requested floor
     public static int GetSpriteFromMap(int curFloor, int y, int x)
     {
         TMap curMap = TomentEditor.instance.currentMap;
@@ -25,6 +29,7 @@ public class Utilities
         }
     }
 
+    // Gets the wall at (y,x) from the requested floor
     public static WallObject GetWallFromMap(int curFloor, int y, int x)
     {
         TMap curMap = TomentEditor.instance.currentMap;
@@ -52,6 +57,7 @@ public class Utilities
         return wallObj;
     }
 
+    // Sets the sprite at (y,x) from the requested floor
     public static void SetInSpritesMap(int curFloor, int y, int x, int val)
     {
         TMap curMap = TomentEditor.instance.currentMap;
@@ -76,6 +82,7 @@ public class Utilities
         }
     }
 
+    // Parses a wall at (y,x) from the requested floor
     public static void SetWallParse(int curFloor, int y, int x, WallObject wallToParse)
     {
         TMap curMap = TomentEditor.instance.currentMap;

@@ -6,11 +6,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/*
+ * Represents a .tmap file
+ */
 public class TMap 
 {
     public static final int MAP_WIDTH = 24; 
     public static final int MAP_HEIGHT = 24;
 
+    // All TMap properties (same as TomentRaycaster)
     public String ID;
     public String displayName;
     
@@ -37,6 +41,7 @@ public class TMap
     public boolean hasAbsCeiling;
     public int absCeilingLevel;
 
+    // Constructor, set default map state
     public TMap()
     {
         for(int y=0; y<24; y++)
@@ -69,6 +74,7 @@ public class TMap
             }
     }
 
+    // Loads a map from the disk "Main.Path/Data/maps/"
     public void LoadMap(String _id)
     {
         ID = _id;
@@ -195,6 +201,7 @@ public class TMap
         System.out.println("Map successfully loaded!");
     }
 
+    // Reads the WallMap from the .tmap file
     private void ReadWallMapFromFile(Scanner fileScanner, WallObject map[][])
     {
         String curLine;
@@ -332,6 +339,7 @@ public class TMap
         }
     }
 
+    // Reads a matrix map (only numbers) from the file
     private void ReadMapFromFile(Scanner fileScanner, int map[][])
     {
         String curLine;
@@ -386,6 +394,7 @@ public class TMap
         }
     }
 
+    // Allows to perform Undo thansk to memento
     public void RestoreFromMemento(TMapMemento memento)
     {
         System.out.println("restoring");

@@ -13,12 +13,15 @@ import tomentme.TomentEditor;
 import tomentme.Map.TMap;
 import java.awt.event.*;
 
+/*
+ * Represents the DialogBox that edits the settings of a map
+ */
 public class MapSettings extends JDialog
 {
-
+    // All fields
     private JTextField idValue;
     private JTextField nameValue;
-    private JFormattedTextField startingLevel;
+    private JTextField startingLevel;
     private JTextField startingPosX;
     private JTextField startingPosY;
     private JTextField startingRot;
@@ -29,33 +32,30 @@ public class MapSettings extends JDialog
     private JTextField ceilingLevel;
 
 
+    // Constructor
     public MapSettings(JFrame frame, String title, boolean modal)
     {
         super(frame, title, modal);
         
+        // Set layout
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         Initialize();
         
+        // Set final properties
         this.setLocationRelativeTo(frame);
         this.setSize(300, 400);
         this.setVisible(true);
     }
 
+    // Initializes the panel by adding all the content
     public void Initialize()
     {
-        // To convert text to int only
-        NumberFormat longFormat = NumberFormat.getIntegerInstance();
-        NumberFormatter longNumberFormatter = new NumberFormatter(longFormat);
-        longNumberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
-        longNumberFormatter.setAllowsInvalid(false); //this is the key!!
-        longNumberFormatter.setMinimum(0l); //Optional
-
         TMap currentMap = TomentEditor.instance.currentMap;
-
 
         JPanel content = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
+        // ID
         JPanel idPanel = new JPanel();
         JLabel idLabel = new JLabel("ID: ");
         idValue = new JTextField(20);
@@ -64,6 +64,7 @@ public class MapSettings extends JDialog
         idPanel.add(idValue);
         content.add(idPanel);
 
+        // Name
         JPanel namePanel = new JPanel();
         JLabel nameLabel = new JLabel("Name: ");
         nameValue = new JTextField(20);
@@ -72,15 +73,16 @@ public class MapSettings extends JDialog
         namePanel.add(nameValue);
         content.add(namePanel);
 
+        // Level
         JPanel startingLevelPanel = new JPanel();
         JLabel startingLevelLabel = new JLabel("Floor: ");
-        startingLevel = new JFormattedTextField(longNumberFormatter);
+        startingLevel = new JFormattedTextField(20);
         startingLevel.setText(Integer.toString(currentMap.playerStartingLevel));
-        startingLevel.setColumns(20);
         startingLevelPanel.add(startingLevelLabel);
         startingLevelPanel.add(startingLevel);
         content.add(startingLevelPanel);
 
+        // Pos
         JPanel startingPos = new JPanel();
         JLabel startingPosLabel = new JLabel("Start (X,Y): ");
         startingPosX = new JTextField(2);
@@ -92,6 +94,7 @@ public class MapSettings extends JDialog
         startingPos.add(startingPosY);
         content.add(startingPos);
 
+        // Rot
         JPanel startingRotPanel = new JPanel();
         JLabel startingRotLabel = new JLabel("Rotation: ");
         startingRot = new JTextField(4);
@@ -100,6 +103,7 @@ public class MapSettings extends JDialog
         startingRotPanel.add(startingRot);
         content.add(startingRotPanel);
 
+        // Wall light
         JPanel wallLightPanel = new JPanel();
         JLabel startingWallLightLabel = new JLabel("Wall Light: ");
         wallLight = new JTextField(4);
@@ -108,6 +112,7 @@ public class MapSettings extends JDialog
         wallLightPanel.add(wallLight);
         content.add(wallLightPanel);
 
+        // Floor light
         JPanel floorLightPanel = new JPanel();
         JLabel startingFloorLightLabel = new JLabel("Floor Light: ");
         floorLight = new JTextField(4);
@@ -116,6 +121,7 @@ public class MapSettings extends JDialog
         floorLightPanel.add(floorLight);
         content.add(floorLightPanel);
 
+        // SkyID
         JPanel skyIDPanel = new JPanel();
         JLabel skyIDLabel = new JLabel("Sky ID: ");
         skyID = new JTextField(20);
@@ -124,6 +130,7 @@ public class MapSettings extends JDialog
         skyIDPanel.add(skyID);
         content.add(skyIDPanel);
 
+        // Has ceiling
         JPanel absCeilPanel = new JPanel();
         JLabel absCeilLabel = new JLabel("Abs Ceiling?");
         absCeil = new JTextField(4);
@@ -132,6 +139,7 @@ public class MapSettings extends JDialog
         absCeilPanel.add(absCeil);
         content.add(absCeilPanel);
 
+        // Ceiling lvl
         JPanel ceilingLevelPanel = new JPanel();
         JLabel ceilingLevelLabel = new JLabel("Ceiling Lvl: ");
         ceilingLevel = new JTextField(4);
@@ -140,6 +148,7 @@ public class MapSettings extends JDialog
         ceilingLevelPanel.add(ceilingLevel);
         content.add(ceilingLevelPanel);
 
+        // Save button
         JButton saveBtn = new JButton("SAVE");
         saveBtn.addActionListener(new ActionListener()
         {
@@ -151,6 +160,7 @@ public class MapSettings extends JDialog
         });
 
 
+        // Cancel button
         JButton cancelBTn = new JButton("CANCEL");
         cancelBTn.addActionListener(new ActionListener()
         {
@@ -166,14 +176,14 @@ public class MapSettings extends JDialog
         content.add(cancelBTn);
 
         this.add(content);
-
-
     }
 
+    // Saves the settings on the map
     public void Save()
     {
         TMap currentMap = TomentEditor.instance.currentMap;
 
+        // Save all properties
         currentMap.ID = idValue.getText();
         currentMap.displayName = nameValue.getText();
 
@@ -194,6 +204,7 @@ public class MapSettings extends JDialog
         this.dispose();
     }
 
+    // Cancels the process
     public void Cancel()
     {
         this.dispose();

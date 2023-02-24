@@ -7,6 +7,9 @@ import tomentme.TomentEditor;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
+/*
+ * Commands button that allows to go up a level
+ */
 public class CommandUpLevelButton extends JButton
 {
     public CommandUpLevelButton()
