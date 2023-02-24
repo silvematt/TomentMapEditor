@@ -7,6 +7,7 @@ import javax.swing.*;
 import tomentme.TomentEditor;
 import tomentme.GUI.Dialogs.MapSettings;
 import tomentme.GUI.Dialogs.OpenMapDialog;
+import tomentme.GUI.Dialogs.SaveMapAsDialog;
 
 public class MenuBarActions 
 {
@@ -43,6 +44,15 @@ public class MenuBarActions
         public void actionPerformed(ActionEvent e)
         {
             OpenMapDialog settings = new OpenMapDialog(GUI.GetFrame(), "Open Map", true);
+        }
+    }
+
+    public static class SaveAsAction extends AbstractAction
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SaveMapAsDialog settings = new SaveMapAsDialog(GUI.GetFrame(), "Save As", true);
         }
     }
 

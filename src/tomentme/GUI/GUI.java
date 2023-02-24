@@ -54,6 +54,7 @@ public class GUI
         Action miExitAction = new MenuBarActions.ExitAction();
         Action miOpenAction = new MenuBarActions.OpenMapAction();
         Action miSaveAction = new MenuBarActions.SaveMapAction();
+        Action miSaveAsAction = new MenuBarActions.SaveAsAction();
 
         miNew = new JMenuItem(miNewMapAction);
         miNew.setText("New Map");
@@ -61,7 +62,8 @@ public class GUI
         miOpen.setText("Open Map");
         miSave = new JMenuItem(miSaveAction);
         miSave.setText("Save");
-        miSaveAs = new JMenuItem("Save as");
+        miSaveAs = new JMenuItem(miSaveAsAction);
+        miSaveAs.setText("Save as");
         miExit = new JMenuItem(miExitAction);
         miExit.setText("Exit");
 
