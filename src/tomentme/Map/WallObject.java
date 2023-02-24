@@ -1,5 +1,8 @@
 package tomentme.Map;
 
+/*
+ * Reperesents a Wall in a level map
+ */
 public class WallObject 
 {
     public static int TEXTURE_ARRAY_TOP =  0;
@@ -9,10 +12,12 @@ public class WallObject
     public static int TEXTURE_ARRAY_UP = 4;
     public static int TEXTURE_ARRAY_DOWN = 5;
 
+    // Properties
     public int assetID;
     public int[] textureArray; 
     public String data;
 
+    // Constructor
     public WallObject()
     {
         this.assetID = 0;
@@ -20,6 +25,7 @@ public class WallObject
         this.data = new String();
     }
 
+    // Allows to paste all the properties from another wall object
     public void PasteValues(WallObject other)
     {
         this.assetID = other.assetID;
